@@ -33,6 +33,9 @@ object personajeNivel2 {
 	}
 	method moverAbajo() { 
 		self.position(self.position().down(1))
+		energia - 1
+	}
+	method comer() {
 		//aca irian los pollos
 	}
 }
