@@ -12,6 +12,11 @@ class Caja {
 	const property image = "caja.png"
 }
 class Deposito {
-	
+	var property position = []
 }
-
+class Pollo {
+	var property position
+	var energia 
+	
+	method comer() = energia
+}
