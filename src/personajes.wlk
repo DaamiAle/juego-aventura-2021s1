@@ -21,19 +21,19 @@ object personajeNivel2 {
 	
 	method moverIzquierda() { 
 		self.position(self.position().left(1))
-		energia - 1
+		energia =- 1
 	}
 	method moverDerecha() { 
 		self.position(self.position().right(1))
-		energia - 1
+		energia =- 1
 	}
 	method moverArriba() { 
 		self.position(self.position().up(1))
-		energia - 1
+		energia =- 1
 	}
 	method moverAbajo() { 
 		self.position(self.position().down(1))
-		energia - 1
+		energia =- 1
 	}
 	method comer() {
 		//aca irian los pollos
