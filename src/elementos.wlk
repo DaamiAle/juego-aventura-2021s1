@@ -6,11 +6,12 @@ class Bloque {
 	
 	// agregar comportamiento	
 }
-//prueba github
-class Hogar {
-	var property nivelDeMugre
-	var property confortQueOfrece
-	method esBueno() = nivelDeMugre
-	method prueba() = confortQueOfrece + nivelDeMugre
+
+class Caja {
+	var property position
+	const property image = "caja.png"
+}
+class Deposito {
+	
 }
 
