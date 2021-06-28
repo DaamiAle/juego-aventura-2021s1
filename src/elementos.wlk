@@ -1,4 +1,6 @@
 import wollok.game.*
+import orientaciones.*
+import utilidades.*
 
 class Bloque {
 	var property position
@@ -8,9 +10,24 @@ class Bloque {
 }
 
 class Caja {
-	var property position
+	var property position = utilidadesParaJuego.posicionArbitraria()
 	const property image = "caja.png"
+	
+		method puedeColisionar() = false 
+	
+	method puedeMover() = true
+	
+	method mover(unaOrientacion) {
+		if(self.puedoMoverAl(unaOrientacion)) {
+			self.position(unaOrientacion.posicion(self))
+		} else {}
+	}
+	
+	method puedoMoverAl( unaOrientacion ) {
+		return game.getObjectsIn( unaOrientacion.posicion(self) ).all { unObj => unObj.puedeColisionar()}
+	}
 }
+
 class Deposito {
 	var property position = []
 }

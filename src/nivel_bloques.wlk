@@ -3,6 +3,7 @@ import fondo.*
 import personajes.*
 import elementos.*
 import nivel_llaves.*
+import orientaciones.*
 
 
 object nivelBloques {
@@ -13,6 +14,7 @@ object nivelBloques {
 				 
 		// otros visuals, p.ej. bloques o llaves
 		game.addVisual(new Bloque(position=game.at(3,12)))
+		game.addVisual(new Caja)		
 			
 		// personaje, es importante que sea el último visual que se agregue
 		game.addVisual(personajeSimple)
@@ -20,7 +22,10 @@ object nivelBloques {
 		// teclado
 		// este es para probar, no es necesario dejarlo
 		keyboard.t().onPressDo({ self.terminar() })
-
+		keyboard.up().onPressDo{ personajeSimple.mover(arriba) }
+		keyboard.down().onPressDo{ personajeSimple.mover(abajo) }
+		keyboard.left().onPressDo{ personajeSimple.mover(izquierda) }
+		keyboard.right().onPressDo{ personajeSimple.mover(derecha) }
 		// en este no hacen falta colisiones
 	}
 	
