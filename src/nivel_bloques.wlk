@@ -6,10 +6,11 @@ import nivel_llaves.*
 
 object nivelBloques {
 	method iniciarNivel() {
-		// Deposito
-		game.addVisual(deposito)
+		
 		// En el archivo "eventos.wlk" carga la configuracion de las cajas y la plataforma del deposito.
 		configNivelCajas.aplicar()
+		// Deposito
+		game.addVisual(deposito)
 		// Le asigna la posicion al personaje y luego lo agrega a la visual
 		personajeNivel1.position(game.at(1,game.width()-3))
 		game.addVisual(personajeNivel1)

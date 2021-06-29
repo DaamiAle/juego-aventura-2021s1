@@ -46,5 +46,10 @@ class Pollo inherits Objeto{
 	override method image() = "pollo.png"
 	override method puedeColisionar() = true
 }
+object fondoNivel1 inherits Objeto {
+	override method image() = "fondoNivel1.png"
+	override method puedeColisionar() = true
+	override method puedeMover(unSentido) = true
+}
 
 

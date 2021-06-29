@@ -6,7 +6,7 @@ program juego_aventura {
 	game.title("Oh qué aventura")
 	game.height(15)
 	game.width(15)
-	game.boardGround("fondoNivel1.png")
+	game.boardGround("fondoBlanco.png")
 
 	nivelBloques.iniciarNivel()	
 	

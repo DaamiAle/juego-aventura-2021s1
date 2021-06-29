@@ -20,6 +20,9 @@ object conversacion{
 
 object configNivelCajas{
 	method aplicar(){
+		// Fondo
+		fondoNivel1.position(game.at(0,0))
+		game.addVisual(fondoNivel1)
 		// Cajas:
 		game.addVisual(new Caja(position=posiciones.posicionAleatoriaCajas()))
 		game.addVisual(new Caja(position=posiciones.posicionAleatoriaCajas()))
