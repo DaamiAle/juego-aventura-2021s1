@@ -1,49 +1,60 @@
 import wollok.game.*
-import eventos.*
-import elementos.*
+import orientaciones.*
 
 // en la implementación real, conviene tener un personaje por nivel
 // los personajes probablemente tengan un comportamiendo más complejo que solamente
 // imagen y posición
 
-class Personaje {
-	var property position
-	const property image = "player.png"
-	method mover(unSentido) { if (self.puedeMover(unSentido)) { self.position(unSentido.position(self)) } else { game.say(self,"Personaje: No puedo moverme en esa direccion") } }
-	method puedeMover(unSentido) {
-		var resultado = false
-		if (unSentido.equals(izquierda))	{ resultado = self.position().x() > 0 }
-		else if (unSentido.equals(derecha))	{ resultado = self.position().x() < game.width() - 1  }
-		else if (unSentido.equals(arriba))	{ resultado = self.position().y() < game.height() - 1 }
-		else 								{ resultado = self.position().y() > 0 }
-		return resultado
-	}
-}
-
-object personajeNivel1 inherits Personaje{ 
-	override method puedeMover(unSentido) {
-		const objetos = game.getObjectsIn(unSentido.position(self))
-		return super(unSentido) and objetos.all{ obj => obj.puedeMover(unSentido)}
-	} 
-	// Movimientos
-	override method mover(unSentido) {
-		const objetos = game.getObjectsIn(unSentido.position(self))
-		if (not objetos.isEmpty()) { 
-			objetos.forEach{ obj => obj.mover(unSentido) }
-			super(unSentido)
+object personajeSimple {
+	var property position = game.at(10,8)
+	const property image = "player.png"	
+	
+	//MOVIMIENTO
+	
+	method mover(unaOrientacion) {
+		if(self.puedoMoverAl(unaOrientacion)) {
+			self.position(unaOrientacion.posicion(self))
+		} else if (self.puedoEmpujarAl(unaOrientacion)) {
+			self.empujar(unaOrientacion)
+			self.position(unaOrientacion.posicion(self))
 		}
-		else { super(unSentido) }
-	}
-	method estaEnPosicionDeSalida() = self.position() == deposito.position().down(1)
-}
-
-object personajeNivel2 inherits Personaje{
-	var energia = 40
-	override method mover(unSentido) { 
-		super(unSentido)
-		energia =- 1
+		else {}
 	}
 	
+	method empujar(unaOrientacion) {
+		game.getObjectsIn(unaOrientacion.posicion(self)).forEach { caja => caja.mover(unaOrientacion)}
+	}
+	
+	method puedoMoverAl( unaOrientacion ) {
+		return game.getObjectsIn( unaOrientacion.posicion(self) ).all { unObj => unObj.puedeColisionar()}
+	}
+		
+	method puedoEmpujarAl(unaOrientacion){
+		return game.getObjectsIn( unaOrientacion.posicion(self) ).all { unObj => unObj.puedeMover()}
+	}
+}
+
+object personajeNivel2 {
+	var property position = game.at(10,8)
+	const property image = "player.png"
+	var energia = 40
+	
+	method moverIzquierda() { 
+		self.position(self.position().left(1))
+		energia =- 1
+	}
+	method moverDerecha() { 
+		self.position(self.position().right(1))
+		energia =- 1
+	}
+	method moverArriba() { 
+		self.position(self.position().up(1))
+		energia =- 1
+	}
+	method moverAbajo() { 
+		self.position(self.position().down(1))
+		energia =- 1
+	}
 	method comer() {
 		//aca irian los pollos
 	}
