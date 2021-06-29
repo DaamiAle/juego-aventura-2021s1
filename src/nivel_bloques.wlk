@@ -4,7 +4,6 @@ import personajes.*
 import elementos.*
 import nivel_llaves.*
 
-
 object nivelBloques {
 	method iniciarNivel() {
 		// Deposito
@@ -25,7 +24,7 @@ object nivelBloques {
 		// Final
 		keyboard.t().onPressDo({ 
 			if (personajeNivel1.estaEnPosicionDeSalida()){
-				if (verificarCajas.puedePasarDeNivel()) {
+				if (verificadorDeCajas.puedePasarDeNivel()) {
 					self.terminarNivel()
 				} else {
 					game.say(deposito, "Deposito: Aun no puedes pasar de nivel")

@@ -1,4 +1,5 @@
 import wollok.game.*
+import eventos.*
 
 object arriba 		{ method position(obj) = obj.position().up(1) 	}
 object abajo 		{ method position(obj) = obj.position().down(1) }
@@ -16,7 +17,6 @@ class Objeto {
 class ParedLadrillo inherits Objeto{
 	override method image() = "paredDeLadrillo.png"
 	override method puedeColicionar() = false
-	
 }
 
 class Caja inherits Objeto{
@@ -41,7 +41,7 @@ object deposito inherits Objeto {
 }
 
 class Pollo inherits Objeto{
-	var energia 
+	var energia
 	method comer() = energia
 	override method image() = "pollo.png"
 	override method puedeColicionar() = true

@@ -10,6 +10,9 @@ object nivelLlaves {
 				 
 		// otros visuals, p.ej. bloques o llaves
 			
+		posicionPollos.colocarPollos()
+			
+			
 		// personaje, es importante que sea el último visual que se agregue
 		personajeNivel2.position(game.at(1,game.width()-3))
 		game.addVisual(personajeNivel2)

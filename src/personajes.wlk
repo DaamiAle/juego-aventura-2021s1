@@ -2,11 +2,7 @@ import wollok.game.*
 import eventos.*
 import elementos.*
 
-// en la implementación real, conviene tener un personaje por nivel
-// los personajes probablemente tengan un comportamiendo más complejo que solamente
-// imagen y posición
-
-class Personaje {
+class Personaje { // Clase abstracta de personaje. Para usarla de plantilla
 	var property position
 	const property image = "player.png"
 	method mover(unSentido) { if (self.puedeMover(unSentido)) { self.position(unSentido.position(self)) } else { game.say(self,"Personaje: No puedo moverme en esa direccion") } }
@@ -25,7 +21,6 @@ object personajeNivel1 inherits Personaje{
 		const objetos = game.getObjectsIn(unSentido.position(self))
 		return super(unSentido) and objetos.all{ obj => obj.puedeMover(unSentido)}
 	} 
-	// Movimientos
 	override method mover(unSentido) {
 		const objetos = game.getObjectsIn(unSentido.position(self))
 		if (not objetos.isEmpty()) { 
@@ -42,8 +37,8 @@ object personajeNivel2 inherits Personaje{
 	override method mover(unSentido) { 
 		super(unSentido)
 		energia =- 1
+		
 	}
-	
 	method comer() {
 		//aca irian los pollos
 	}
