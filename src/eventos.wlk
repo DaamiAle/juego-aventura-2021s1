@@ -11,7 +11,7 @@ object aleatorios{
 object conversacion{
 	method nivel1Inicio() {
 		game.say(deposito, "Deposito: Hola jugador. Bienvenido!")
-		game.say(deposito, "Deposito: Me podrias ayudar con esas cajas?")
+		game.schedule(300,game.say(deposito, "Deposito: Me podrias ayudar con esas cajas?"))
 		game.say(deposito, "Deposito: Hay que llevarlas a la plataforma de piedra a tu derecha.")
 		game.say(deposito, "Deposito: Va una en cada espacio, no puedes apilarlas.")
 		game.say(deposito, "Deposito: Cuando termines te ayudare a continuar tu aventura.")
