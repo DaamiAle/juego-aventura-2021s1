@@ -80,7 +80,7 @@ object puertaDeSalidaNivel2 inherits Objeto{
 	override method puedeColisionar() = true
 }
 class Cofre inherits Objeto{
-	override method image() = ""
+	override method image() = "cofre.png"
 	override method puedeColisionar() = true
 }
 class CeldaSorpresa inherits Objeto{

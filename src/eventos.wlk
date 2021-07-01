@@ -44,9 +44,7 @@ object configuraciones{
 		colocadores.caja()
 		// Deposito
 		game.addVisual(deposito)
-		// Personaje
-		personajeNivel1.position(game.at(1,game.width()-3))
-		game.addVisual(personajeNivel1)
+		
 	}
 	method nivelLlaves(){
 		// Fondo

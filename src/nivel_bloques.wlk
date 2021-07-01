@@ -10,6 +10,9 @@ object nivelBloques {
 		// En el archivo "eventos.wlk" carga la configuracion de las cajas y la plataforma del deposito.
 		configuraciones.nivelCajas()
 		dialogos.nivel1Inicio()
+		// Personaje
+		personajeNivel1.position(game.at(1,game.width()-3))
+		game.addVisual(personajeNivel1)
 		// Teclado
 		keyboard.up().onPressDo 	{ personajeNivel1.mover(arriba) 	}
 		keyboard.down().onPressDo 	{ personajeNivel1.mover(abajo) 		}
