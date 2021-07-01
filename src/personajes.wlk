@@ -4,8 +4,8 @@ import elementos.*
 
 class Personaje { // Clase abstracta de personaje. Para usarla de plantilla
 	var property position
-	const property image = "player.png"
-	method mover(unSentido) { if (self.puedeMover(unSentido)) { self.position(unSentido.position(self)) } else { game.say(self,"Personaje: No puedo moverme en esa direccion") } }
+	method image() = "player.png"
+	method mover(unSentido) { if (self.puedeMover(unSentido)) { self.position(unSentido.position(self)) } else { dialogos.personajeNoPuedeMoverse() } }
 	method puedeMover(unSentido) {
 		var resultado = false
 		if (unSentido.equals(izquierda))	{ resultado = self.position().x() > 0 }
@@ -29,7 +29,6 @@ object personajeNivel1 inherits Personaje{
 		}
 		else { super(unSentido) }
 	}
-	method estaEnPosicionDeSalida() = self.position() == deposito.position().down(1)
 }
 
 object personajeNivel2 inherits Personaje{
@@ -37,9 +36,27 @@ object personajeNivel2 inherits Personaje{
 	override method mover(unSentido) { 
 		super(unSentido)
 		energia =- 1
-		
 	}
 	method comer() {
 		//aca irian los pollos
 	}
+	method patearCaja(){
+		// aca va un recorrido de direcciones y patear los objetos que estan en las celdas adyacentes ortogonales
+	}
 }
+object personajeNivel3 inherits Personaje{
+	var granadas = 0
+	var property ultimoSentidoDeMovimiento
+	override method mover(unSentido) { 
+		super(unSentido)
+		self.ultimoSentidoDeMovimiento(unSentido)
+	}
+	method lanzarGranada() {
+		//aca irian los pollos
+		granadas =- 1
+	}
+
+}
+
+
+

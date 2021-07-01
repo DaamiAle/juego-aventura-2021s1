@@ -1,10 +1,22 @@
 import wollok.game.*
-import eventos.*
 
-object arriba 		{ method position(obj) = obj.position().up(1) 	}
-object abajo 		{ method position(obj) = obj.position().down(1) }
-object izquierda	{ method position(obj) = obj.position().left(1) }
-object derecha 		{ method position(obj) = obj.position().right(1)} 
+object arriba { 
+	method position(obj) = obj.position().up(1)
+	method siguiente() = derecha
+}
+object derecha 		{ 
+	method position(obj) = obj.position().right(1)
+	method siguiente() = abajo
+} 
+object abajo 		{ 
+	method position(obj) = obj.position().down(1)
+	method siguiente() = izquierda
+}
+object izquierda	{ 
+	method position(obj) = obj.position().left(1)
+	method siguiente() = arriba
+}
+
 
 class Objeto {
 	var property position
@@ -46,10 +58,34 @@ class Pollo inherits Objeto{
 	override method image() = "pollo.png"
 	override method puedeColisionar() = true
 }
+class Llave inherits Objeto{
+	override method image() = "llave.png"
+	override method puedeColisionar() = true
+}
+class Modificador inherits Objeto{
+	const property tipo
+	override method image() = ""
+	override method puedeColisionar() = true
+}
+object puertaDeSalidaNivel2 inherits Objeto{
+	override method image() = ""
+	override method puedeColisionar() = true
+}
+class Cofre inherits Objeto{
+	override method image() = ""
+	override method puedeColisionar() = true
+}
+
+
 object fondoNivel1 inherits Objeto {
 	override method image() = "fondoNivel1.png"
 	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
 }
-
+object fondoNivel2 inherits Objeto {
+	override method position() = game.at(0,0)
+	override method image() = "fondoNivel2.png"
+	override method puedeColisionar() = true
+	override method puedeMover(unSentido) = true
+}
 

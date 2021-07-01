@@ -1,30 +1,26 @@
 import wollok.game.*
 import eventos.*
 import personajes.*
+import elementos.*
+import nivel_elMataBichos.*
 
 object nivelLlaves {
 
-	method configurate() {
-		// fondo - es importante que sea el primer visual que se agregue
-		//game.addVisual(new Fondo(image="fondoCompleto.png"))
-				 
-		// otros visuals, p.ej. bloques o llaves
-			
-		posicionPollos.colocarPollos()
-			
-			
-		// personaje, es importante que sea el último visual que se agregue
-		personajeNivel2.position(game.at(1,game.width()-3))
-		game.addVisual(personajeNivel2)
-		
-		// teclado
-		// este es para probar, no es necesario dejarlo
-		keyboard.g().onPressDo({ self.ganar() })
-
+	method iniciarNivel() {
+		configuraciones.nivelLlaves()	
+		// Teclado
+		keyboard.up().onPressDo 	{ personajeNivel2.mover(arriba) 	}
+		keyboard.down().onPressDo 	{ personajeNivel2.mover(abajo) 		}
+		keyboard.left().onPressDo 	{ personajeNivel2.mover(izquierda) 	}
+		keyboard.right().onPressDo 	{ personajeNivel2.mover(derecha) 	}
 		// colisiones, acá sí hacen falta
+		
+		// este es para probar, no es necesario dejarlo
+		keyboard.g().onPressDo({ self.terminarNivel() })
+		
 	}
 	
-	method ganar() {
+	method terminarNivel() {
 		// es muy parecido al terminar() de nivelBloques
 		// el perder() también va a ser parecido
 		
