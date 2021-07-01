@@ -34,14 +34,14 @@ object configuraciones{
 		// Fondo
 		game.addVisual(fondoNivel1)
 		// Cajas:
-		game.addVisual(new Caja(position=posiciones.posicionAleatoriaCajas()))
-		game.addVisual(new Caja(position=posiciones.posicionAleatoriaCajas()))
-		game.addVisual(new Caja(position=posiciones.posicionAleatoriaCajas()))
-		game.addVisual(new Caja(position=posiciones.posicionAleatoriaCajas()))
-		game.addVisual(new Caja(position=posiciones.posicionAleatoriaCajas()))
-		game.addVisual(new Caja(position=posiciones.posicionAleatoriaCajas()))
-		game.addVisual(new Caja(position=posiciones.posicionAleatoriaCajas()))
-		game.addVisual(new Caja(position=posiciones.posicionAleatoriaCajas()))
+		colocadores.caja()
+		colocadores.caja()
+		colocadores.caja()
+		colocadores.caja()
+		colocadores.caja()
+		colocadores.caja()
+		colocadores.caja()
+		colocadores.caja()
 		// Deposito
 		game.addVisual(deposito)
 		// Personaje
@@ -51,6 +51,8 @@ object configuraciones{
 	method nivelLlaves(){
 		// Fondo
 		game.addVisual(fondoNivel2)
+		// Muros
+		
 		// Llaves 3
 		colocadores.llave()
 		colocadores.llave()
@@ -98,34 +100,41 @@ object verificadores{
 		resultado = resultado and not objetos.isEmpty()
 		return resultado
 	}
-	method posicionEstaOcupada(unaPosicion) = game.getObjectsIn(unaPosicion).isEmpty()
+	method posicionEstaVacia(unaPosicion) = game.getObjectsIn(unaPosicion).isEmpty()
 }
 
 object colocadores{
+	method caja(){
+		const posicionAleatoria = posiciones.posicionAleatoriaCajas()
+		if (verificadores.posicionEstaVacia(posicionAleatoria)) { 
+			game.addVisual( new Caja(position=posicionAleatoria) )
+		}
+		else { self.caja() }
+	}
 	method pollo(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (not verificadores.posicionEstaOcupada(posicionAleatoria)) { 
+		if (verificadores.posicionEstaVacia(posicionAleatoria)) { 
 			game.addVisual( new Pollo(energia=aleatorios.numeroDecena(),position=posicionAleatoria) )
 		}
 		else { self.pollo() }
 	}
 	method llave(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (not verificadores.posicionEstaOcupada(posicionAleatoria)) { 
+		if (verificadores.posicionEstaVacia(posicionAleatoria)) { 
 			game.addVisual( new Llave(position=posicionAleatoria) )
 		}
 		else { self.llave() }
 	}
 	method modificador(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (not verificadores.posicionEstaOcupada(posicionAleatoria)) { 
+		if (verificadores.posicionEstaVacia(posicionAleatoria)) { 
 			game.addVisual( new Modificador(tipo=aleatorios.numeroUnidad()%3,position=posicionAleatoria) )
 		}
 		else { self.modificador() }
 	}
 	method cofre(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (not verificadores.posicionEstaOcupada(posicionAleatoria)) { 
+		if (verificadores.posicionEstaVacia(posicionAleatoria)) { 
 			game.addVisual( new Cofre(position=posicionAleatoria) )
 		}
 		else { self.cofre() }

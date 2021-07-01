@@ -28,8 +28,8 @@ object nivelBloques {
 		// Aca va la Transicion de nivel
 		
 		// Pasamos al siguiente nivel
-		game.schedule(3000, {game.clear()})
-		nivelLlaves.iniciarNivel()
+//		game.schedule(3000, {game.clear()})
+		//nivelLlaves.iniciarNivel()
 	}
 		
 }

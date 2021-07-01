@@ -3,18 +3,26 @@ import wollok.game.*
 object arriba { 
 	method position(obj) = obj.position().up(1)
 	method siguiente() = derecha
+	method anterior() = izquierda
+	method opuesto() = abajo
 }
 object derecha 		{ 
 	method position(obj) = obj.position().right(1)
 	method siguiente() = abajo
+	method anterior() = arriba
+	method opuesto() = izquierda
 } 
 object abajo 		{ 
 	method position(obj) = obj.position().down(1)
 	method siguiente() = izquierda
+	method anterior() = derecha
+	method opuesto() = arriba
 }
 object izquierda	{ 
 	method position(obj) = obj.position().left(1)
 	method siguiente() = arriba
+	method anterior () = abajo
+	method opuesto() = derecha
 }
 
 
@@ -75,7 +83,11 @@ class Cofre inherits Objeto{
 	override method image() = ""
 	override method puedeColisionar() = true
 }
-
+class CeldaSorpresa inherits Objeto{
+	override method image() = ""
+	override method puedeColisionar() = true
+	
+}
 
 object fondoNivel1 inherits Objeto {
 	override method image() = "fondoNivel1.png"
