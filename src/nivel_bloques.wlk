@@ -2,6 +2,7 @@ import wollok.game.*
 import utilidades.*
 import personajes.*
 import elementos.*
+import elementos_nivel1.*
 import nivel_llaves.*
 import dialogos.*
 

@@ -1,6 +1,8 @@
 import wollok.game.*
 import elementos.*
 import personajes.*
+import elementos_nivel1.*
+import elementos_nivel2.*
 
 object aleatorios{
 	method numeroCentena() 	= 1.randomUpTo(9).truncate(0) * 100
@@ -128,11 +130,4 @@ object colocar{
 }
 
 
-object colisiones{
-	method colisionDe(unObjeto){
-		if (unObjeto.puedeColisionar()) {
-			unObjeto.colisionar()
-		}
-	}
-}
 

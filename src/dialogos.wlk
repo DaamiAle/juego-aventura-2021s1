@@ -1,5 +1,7 @@
 import wollok.game.*
 import elementos.*
+import elementos_nivel1.*
+//import elementos_nivel2.*
 import personajes.*
 
 

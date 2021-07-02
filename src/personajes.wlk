@@ -36,9 +36,18 @@ object personajeNivel1 inherits Personaje{
 
 object personajeNivel2 inherits Personaje{
 	var energia = 40
+	override method puedeColisionar() = true
 	override method mover(unSentido) { 
 		super(unSentido)
 		energia =- 1
+	}
+	method actualizarIndicadorEnergia(){
+		const unidad = energia % 10
+		const decena = energia.div(10) % 10
+		const centena = energia.div(100)
+		indicadorUnidad.valor(unidad)
+		indicadorDecena.valor(decena)
+		indicadorCentena.valor(centena)
 	}
 	
 	method comer() {
@@ -47,16 +56,22 @@ object personajeNivel2 inherits Personaje{
 	method patearCofre(){
 		// aca va un recorrido de direcciones y patear los objetos que estan en las celdas adyacentes ortogonales
 	}
+	method colisionar(unObjeto){
+		if (unObjeto.puedeColisionar()){
+			unObjeto.colisionarCon(self)
+		}
+	}
 }
 object personajeNivel3 inherits Personaje{
 	var granadas = 0
 	var property ultimoSentidoDeMovimiento
+	override method puedeColisionar() = true
 	override method mover(unSentido) { 
 		super(unSentido)
 		self.ultimoSentidoDeMovimiento(unSentido)
 	}
 	method lanzarGranada() {
-		//aca irian los pollos
+		
 		granadas =- 1
 	}
 
