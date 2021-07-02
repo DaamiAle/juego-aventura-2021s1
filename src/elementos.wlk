@@ -90,6 +90,7 @@ class CeldaSorpresa inherits Objeto{
 }
 
 object fondoNivel1 inherits Objeto {
+	override method position() = game.at(0,0)
 	override method image() = "fondoNivel1.png"
 	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
