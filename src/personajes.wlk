@@ -1,6 +1,7 @@
 import wollok.game.*
-import eventos.*
+import configuracionesNiveles.*
 import elementos.*
+import dialogos.*
 
 class Personaje { // Clase abstracta de personaje. Para usarla de plantilla
 	var property position

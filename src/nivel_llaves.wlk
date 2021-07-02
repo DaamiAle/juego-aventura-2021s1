@@ -1,5 +1,5 @@
 import wollok.game.*
-import eventos.*
+import configuracionesNiveles.*
 import personajes.*
 import elementos.*
 import nivel_elMataBichos.*

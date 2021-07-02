@@ -8,40 +8,19 @@ object aleatorios{
 	method numeroUnidad() 	= 1.randomUpTo(9).truncate(0)
 }
 
-object dialogos{
-	method nivel1Inicio() {
-		game.say(deposito, "Deposito: Hola jugador. Bienvenido!")
-		game.say(deposito, "Deposito: Me podrias ayudar con esas cajas?")
-		game.say(deposito, "Deposito: Hay que llevarlas a la plataforma de piedra a tu derecha.")
-		game.say(deposito, "Deposito: Va una en cada espacio, no puedes apilarlas.")
-		game.say(deposito, "Deposito: Cuando termines te ayudare a continuar tu aventura.")
-	}
-	method cajasNivel1Faltantes(){
-		game.say(deposito, "Deposito: Aun no puedes pasar de nivel")
-		game.say(deposito, "Deposito: Faltan cajas por colocar en la plataforma.")
-	}
-	method posicionDeSalidaIncorrecta(){
-		game.say(personajeNivel1, "No puedo pasar de nivel desde aqui.")
-		game.say(personajeNivel1, "Debo estar debajo del deposito.")
-	}
-	method personajeNoPuedeMoverse(){
-		game.say(self,"Personaje: No puedo moverme en esa direccion")
-	}
-}
-
 object configuraciones{
 	method nivelCajas(){
 		// Fondo
 		game.addVisual(fondoNivel1)
 		// Cajas:
-		colocadores.caja()
-		colocadores.caja()
-		colocadores.caja()
-		colocadores.caja()
-		colocadores.caja()
-		colocadores.caja()
-		colocadores.caja()
-		colocadores.caja()
+		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
+		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
+		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
+		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
+		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
+		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
+		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
+		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
 		// Deposito
 		game.addVisual(deposito)
 		
@@ -75,6 +54,7 @@ object configuraciones{
 object posiciones {
 	method posicionAleatoriaCajas() 	= game.at( 1.randomUpTo(game.width()-2).truncate(0), 1.randomUpTo(game.height()-5).truncate(0) )
 	method asignarPosicionAleatoria() 	= game.at( 0.randomUpTo(game.width()-1).truncate(0), 0.randomUpTo(game.height()-1).truncate(0) ) 
+	method posicionEstaVacia(unaPosicion) = game.getObjectsIn(unaPosicion).isEmpty()
 }
 
 object verificadores{
@@ -98,41 +78,35 @@ object verificadores{
 		resultado = resultado and not objetos.isEmpty()
 		return resultado
 	}
-	method posicionEstaVacia(unaPosicion) = game.getObjectsIn(unaPosicion).isEmpty()
+	
 }
 
 object colocadores{
-	method caja(){
-		const posicionAleatoria = posiciones.posicionAleatoriaCajas()
-		if (verificadores.posicionEstaVacia(posicionAleatoria)) { 
-			game.addVisual( new Caja(position=posicionAleatoria) )
-		}
-		else { self.caja() }
-	}
+	
 	method pollo(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (verificadores.posicionEstaVacia(posicionAleatoria)) { 
+		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
 			game.addVisual( new Pollo(energia=aleatorios.numeroDecena(),position=posicionAleatoria) )
 		}
 		else { self.pollo() }
 	}
 	method llave(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (verificadores.posicionEstaVacia(posicionAleatoria)) { 
+		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
 			game.addVisual( new Llave(position=posicionAleatoria) )
 		}
 		else { self.llave() }
 	}
 	method modificador(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (verificadores.posicionEstaVacia(posicionAleatoria)) { 
+		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
 			game.addVisual( new Modificador(tipo=aleatorios.numeroUnidad()%3,position=posicionAleatoria) )
 		}
 		else { self.modificador() }
 	}
 	method cofre(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (verificadores.posicionEstaVacia(posicionAleatoria)) { 
+		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
 			game.addVisual( new Cofre(position=posicionAleatoria) )
 		}
 		else { self.cofre() }

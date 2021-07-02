@@ -1,8 +1,9 @@
 import wollok.game.*
-import eventos.*
+import configuracionesNiveles.*
 import personajes.*
 import elementos.*
 import nivel_llaves.*
+import dialogos.*
 
 object nivelBloques {
 	method iniciarNivel() {
