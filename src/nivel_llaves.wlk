@@ -1,5 +1,5 @@
 import wollok.game.*
-import configuracionesNiveles.*
+import utilidades.*
 import personajes.*
 import elementos.*
 import nivel_elMataBichos.*
@@ -14,7 +14,7 @@ object nivelLlaves {
 		keyboard.left().onPressDo 	{ personajeNivel2.mover(izquierda) 	}
 		keyboard.right().onPressDo 	{ personajeNivel2.mover(derecha) 	}
 		// colisiones, acá sí hacen falta
-		
+		game.onCollideDo(personajeNivel2, colisiones.colisionDe(personajeNivel2))
 		// este es para probar, no es necesario dejarlo
 		keyboard.g().onPressDo({ self.terminarNivel() })
 		

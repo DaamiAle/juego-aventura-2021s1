@@ -1,5 +1,5 @@
 import wollok.game.*
-import configuracionesNiveles.*
+import utilidades.*
 import elementos.*
 import dialogos.*
 
@@ -15,9 +15,11 @@ class Personaje { // Clase abstracta de personaje. Para usarla de plantilla
 		else 								{ resultado = self.position().y() > 0 }
 		return resultado
 	}
+	method puedeColisionar()
 }
 
 object personajeNivel1 inherits Personaje{ 
+	override method puedeColisionar() = false
 	override method puedeMover(unSentido) {
 		const objetos = game.getObjectsIn(unSentido.position(self))
 		return super(unSentido) and objetos.all{ obj => obj.puedeMover(unSentido)}
@@ -38,10 +40,11 @@ object personajeNivel2 inherits Personaje{
 		super(unSentido)
 		energia =- 1
 	}
+	
 	method comer() {
 		//aca irian los pollos
 	}
-	method patearCaja(){
+	method patearCofre(){
 		// aca va un recorrido de direcciones y patear los objetos que estan en las celdas adyacentes ortogonales
 	}
 }

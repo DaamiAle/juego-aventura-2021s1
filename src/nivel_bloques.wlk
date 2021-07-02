@@ -1,5 +1,5 @@
 import wollok.game.*
-import configuracionesNiveles.*
+import utilidades.*
 import personajes.*
 import elementos.*
 import nivel_llaves.*

@@ -31,18 +31,18 @@ object configuraciones{
 		// Muros
 		
 		// Llaves 3
-		colocadores.llave()
-		colocadores.llave()
-		colocadores.llave()
+		colocar.llave()
+		colocar.llave()
+		colocar.llave()
 		// Pollos 5
-		colocadores.pollo()
-		colocadores.pollo()
-		colocadores.pollo()
-		colocadores.pollo()
-		colocadores.pollo()
+		colocar.pollo()
+		colocar.pollo()
+		colocar.pollo()
+		colocar.pollo()
+		colocar.pollo()
 		// Modificadores 3
-		colocadores.modificador()
-		colocadores.modificador()
+		colocar.modificador()
+		colocar.modificador()
 		// Personaje
 		personajeNivel2.position(game.at(1,game.width()-3))
 		game.addVisual(personajeNivel2)
@@ -81,7 +81,15 @@ object verificadores{
 	
 }
 
-object colocadores{
+object colocar{
+	
+	method caja(){
+		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
+		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
+			game.addVisual( new Pollo(energia=aleatorios.numeroDecena(),position=posicionAleatoria) )
+		}
+		else { self.caja() }
+	}
 	
 	method pollo(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
@@ -119,4 +127,12 @@ object colocadores{
 	}
 }
 
+
+object colisiones{
+	method colisionDe(unObjeto){
+		if (unObjeto.puedeColisionar()) {
+			unObjeto.colisionar()
+		}
+	}
+}
 
