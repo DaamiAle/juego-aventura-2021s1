@@ -1,5 +1,6 @@
 import wollok.game.*
 import nivel_bloques.*
+import nivel_final.*
 
 program juego_aventura {
 	game.cellSize(40)
@@ -7,8 +8,10 @@ program juego_aventura {
 	game.height(15)
 	game.width(15)
 	game.boardGround("fondoBlanco.png")
+	//game.ground("plataformaPiedra.png")
 
 	nivelBloques.iniciarNivel()
+	//fondeo.aplicar()
 	
 	game.start()
 }

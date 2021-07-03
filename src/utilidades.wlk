@@ -15,17 +15,9 @@ object configuraciones{
 		// Fondo
 		game.addVisual(fondoNivel1)
 		// Cajas:
-		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
-		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
-		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
-		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
-		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
-		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
-		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
-		game.addVisual( new Caja(position=posiciones.posicionAleatoriaCajas()) )
+		([1,2,3,4,5,6,7,8]).forEach({ i => colocar.caja() })
 		// Deposito
 		game.addVisual(deposito)
-		
 	}
 	method nivelLlaves(){
 		// Fondo
@@ -33,18 +25,12 @@ object configuraciones{
 		// Muros
 		
 		// Llaves 3
-		colocar.llave()
-		colocar.llave()
-		colocar.llave()
+		([1,2,3]).forEach({ i => colocar.llave() })
 		// Pollos 5
-		colocar.pollo()
-		colocar.pollo()
-		colocar.pollo()
-		colocar.pollo()
-		colocar.pollo()
+		([1,2,3,4,5]).forEach({ i => colocar.pollo() })
 		// Modificadores 3
-		colocar.modificador()
-		colocar.modificador()
+		([1,2,3,4]).forEach({ posicion => colocar.modificador(posicion) })
+
 		// Personaje
 		personajeNivel2.position(game.at(1,game.width()-3))
 		game.addVisual(personajeNivel2)
@@ -62,33 +48,16 @@ object posiciones {
 object verificadores{
 	method personajeNivel1EstaEnPosicionDeSalida() = personajeNivel1.position() == deposito.position().down(1)
 	method cajasListas(){
-		var objetos = game.getObjectsIn(((deposito.position().right(2))))
-		var resultado = not objetos.isEmpty()
-		objetos = game.getObjectsIn(((deposito.position().right(3))))
-		resultado = resultado and not objetos.isEmpty()
-		objetos = game.getObjectsIn(((deposito.position().right(4))))
-		resultado = resultado and not objetos.isEmpty()
-		objetos = game.getObjectsIn(((deposito.position().right(5))))
-		resultado = resultado and not objetos.isEmpty()
-		objetos = game.getObjectsIn(((deposito.position().right(2).down(1))))
-		resultado = resultado and not objetos.isEmpty()
-		objetos = game.getObjectsIn(((deposito.position().right(3).down(1))))
-		resultado = resultado and not objetos.isEmpty()
-		objetos = game.getObjectsIn(((deposito.position().right(4).down(1))))
-		resultado = resultado and not objetos.isEmpty()
-		objetos = game.getObjectsIn(((deposito.position().right(5).down(1))))	
-		resultado = resultado and not objetos.isEmpty()
-		return resultado
+		const cajas = game.allVisuals().remove(deposito,personajeNivel1,fondoNivel1)
+		return cajas.all({caja => caja.position().x().between(3,6) and caja.position().y().between(12,13)})
 	}
-	
 }
 
 object colocar{
-	
 	method caja(){
-		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
+		const posicionAleatoria = posiciones.posicionAleatoriaCajas()
 		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-			game.addVisual( new Pollo(energia=aleatorios.numeroDecena(),position=posicionAleatoria) )
+			game.addVisual( new Caja(position=posicionAleatoria) )
 		}
 		else { self.caja() }
 	}
@@ -107,12 +76,8 @@ object colocar{
 		}
 		else { self.llave() }
 	}
-	method modificador(){
-		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-			game.addVisual( new Modificador(tipo=aleatorios.numeroUnidad()%3,position=posicionAleatoria) )
-		}
-		else { self.modificador() }
+	method modificador(posicion){
+		game.addVisual( new Modificador(tipo=aleatorios.numeroUnidad()%3,position=posicion) )
 	}
 	method cofre(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()

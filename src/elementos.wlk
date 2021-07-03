@@ -28,34 +28,19 @@ object izquierda{
 object indicadorUnidad{
 	const property position = game.at(game.height()-1,game.width()-1)
 	var property valor = 0
-	var property image = indicadorNumero.imagenNumero(self.valor())
+	var property image = self.valor()+".png"
 }
 object indicadorDecena{
 	const property position = game.at(game.height()-1,game.width()-2)
 	var property valor = 0
-	var property image = indicadorNumero.imagenNumero(self.valor())
+	var property image = self.valor()+".png"
 }
 object indicadorCentena{
 	const property position = game.at(game.height()-1,game.width()-3)
 	var property valor = 0
-	var property image = indicadorNumero.imagenNumero(self.valor())
+	var property image = self.valor()+".png"
 }
-object indicadorNumero{
-	method imagenNumero(unNumero){
-		var imagen = ""
-		if (unNumero.equals(0)) {imagen = "0.png"}
-		if (unNumero.equals(1)) {imagen = "1.png"}
-		if (unNumero.equals(2)) {imagen = "2.png"}
-		if (unNumero.equals(3)) {imagen = "3.png"}
-		if (unNumero.equals(4)) {imagen = "4.png"}
-		if (unNumero.equals(5)) {imagen = "5.png"}
-		if (unNumero.equals(6)) {imagen = "6.png"}
-		if (unNumero.equals(7)) {imagen = "7.png"}
-		if (unNumero.equals(8)) {imagen = "8.png"}
-		if (unNumero.equals(9)) {imagen = "9.png"}
-		return imagen
-	}
-}
+
 
 class Objeto{
 	var property position

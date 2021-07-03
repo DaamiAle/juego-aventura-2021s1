@@ -7,6 +7,7 @@ class Personaje { // Clase abstracta de personaje. Para usarla de plantilla
 	var property position
 	method image() = "player.png"
 	method mover(unSentido) { if (self.puedeMover(unSentido)) { self.position(unSentido.position(self)) } else { dialogos.personajeNoPuedeMoverse() } }
+	
 	method puedeMover(unSentido) {
 		var resultado = false
 		if (unSentido.equals(izquierda))	{ resultado = self.position().x() > 0 }
@@ -24,6 +25,7 @@ object personajeNivel1 inherits Personaje{
 		const objetos = game.getObjectsIn(unSentido.position(self))
 		return super(unSentido) and objetos.all{ obj => obj.puedeMover(unSentido)}
 	} 
+	
 	override method mover(unSentido) {
 		const objetos = game.getObjectsIn(unSentido.position(self))
 		if (not objetos.isEmpty()) { 
@@ -35,12 +37,16 @@ object personajeNivel1 inherits Personaje{
 }
 
 object personajeNivel2 inherits Personaje{
+	var property llavesEncontradas = 0
+	var modificadorDeComida = null
 	var energia = 40
+	method cambiarModificador(nuevoMod) { modificadorDeComida = nuevoMod }
 	override method puedeColisionar() = true
 	override method mover(unSentido) { 
 		super(unSentido)
 		energia =- 1
 	}
+	
 	method actualizarIndicadorEnergia(){
 		const unidad = energia % 10
 		const decena = energia.div(10) % 10
@@ -49,7 +55,6 @@ object personajeNivel2 inherits Personaje{
 		indicadorDecena.valor(decena)
 		indicadorCentena.valor(centena)
 	}
-	
 	method comer() {
 		//aca irian los pollos
 	}
@@ -61,6 +66,26 @@ object personajeNivel2 inherits Personaje{
 			unObjeto.colisionarCon(self)
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 object personajeNivel3 inherits Personaje{
 	var granadas = 0
@@ -71,9 +96,9 @@ object personajeNivel3 inherits Personaje{
 		self.ultimoSentidoDeMovimiento(unSentido)
 	}
 	method lanzarGranada() {
-		
 		granadas =- 1
 	}
+
 
 }
 
