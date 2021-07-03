@@ -17,10 +17,13 @@ object configuraciones{
 		game.addVisual(fondoNivel1)
 		game.addVisual(indicadorSuperior)
 		// Cajas:
-		(1..8).forEach({ i => colocar.caja() })
+		8.times({ i => colocadores.caja() })
 		game.addVisual(indicadorCajas)
 		// Deposito
 		game.addVisual(deposito)
+		// Personaje
+		personajeNivel1.position(game.at(1,game.width()-3))
+		game.addVisual(personajeNivel1)
 	}
 	method nivelLlaves(){
 		// Fondo
@@ -28,19 +31,18 @@ object configuraciones{
 		game.addVisual(fondoNivel2)
 		indicadorSuperior.nivel(2)
 		game.addVisual(indicadorSuperior)
-		indicadorCentena.valor(0)
 		game.addVisual(indicadorCentena)
 		game.addVisual(indicadorDecena)
 		game.addVisual(indicadorUnidad)
 		// Muros
-		(0..13).forEach({ i => posiciones.muros(i).forEach({pos => game.addVisual(new ParedLadrillo(position=pos))}) })
-		
+		colocadores.laberintoLadrillo()
+//		14.times({ fila => colocadores.muros(fila-1)/*.get(fila-1).forEach({pos => game.addVisual(new ParedLadrillo(position=pos))}) */ })
 		// Llaves 3
-		(1..3).forEach({ i => colocar.llave() })
+		3.times({ i => colocadores.llave() })
 		// Pollos 5
-		(1..5).forEach({ i => colocar.pollo() })
+		5.times({ i => colocadores.pollo() })
 		// Modificadores 3
-		(1..4).forEach({ posicion => colocar.modificador(posicion) })
+		4.times({ posicion => colocadores.modificador(posicion) })
 
 		// Personaje
 		personajeNivel2.position(game.at(1,game.width()-3))
@@ -54,43 +56,22 @@ object posiciones {
 	method posicionAleatoriaCajas() 	= game.at( 1.randomUpTo(game.width()-2).truncate(0), 1.randomUpTo(game.height()-5).truncate(0) )
 	method asignarPosicionAleatoria() 	= game.at( 0.randomUpTo(game.width()-1).truncate(0), 0.randomUpTo(game.height()-1).truncate(0) ) 
 	method posicionEstaVacia(unaPosicion) = game.getObjectsIn(unaPosicion).isEmpty()
-	method muros(clave) {
-		const fila = game.origin().up(clave)
-		const laberinto = [
-			0->[fila.left(3),fila.left(7)],
-			1->[fila.left(1),fila.left(3),fila.left(5),fila.left(7),fila.left(9),fila.left(11),fila.left(13)],
-			2->[fila.left(3),fila.left(5),fila.left(9),fila.left(10),fila.left(11),fila.left(13)],
-			3->[fila,fila.left(1),fila.left(3),fila.left(5),fila.left(6),fila.left(7),fila.left(13)],
-			4->[fila.left(3),fila.left(5),fila.left(7),fila.left(8),fila.left(9),fila.left(10),fila.left(11),fila.left(12),fila.left(13)],
-			5->[fila.left(1),fila.left(2),fila.left(3),fila.left(5),fila.left(11)],
-			6->[fila.left(3),fila.left(7),fila.left(9),fila.left(11),fila.left(13),fila.left(14)],
-			7->[fila,fila.left(2),fila.left(3),fila.left(5),fila.left(6),fila.left(7),fila.left(9)],
-			8->[fila,fila.left(5),fila.left(6),fila.left(9),fila.left(11),fila.left(12),fila.left(13)],
-			9->[fila.left(2),fila.left(3),fila.left(5),fila.left(8),fila.left(9),fila.left(11)],
-			10->[fila.left(1),fila.left(2),fila.left(4),fila.left(5),fila.left(6),fila.left(7),fila.left(8),fila.left(11),fila.left(13),fila.left(14)],
-			11->[fila.left(4),fila.left(8),fila.left(9),fila.left(10),fila.left(11)],
-			12->[fila,fila.left(1),fila.left(2),fila.left(4),fila.left(6),fila.left(11),fila.left(13)],
-			13->[fila,fila.left(1),fila.left(2),fila.left(6),fila.left(7),fila.left(8),fila.left(9),fila.left(13)]
-		]
-		return laberinto.get(clave)
-	}
 }
+
 
 object verificadores{
 	method personajeNivel1EstaEnPosicionDeSalida() = personajeNivel1.position() == deposito.position().down(1)
 	method cajasEnPosicion(){
 		const cajas = game.allVisuals().copy()
 		cajas.removeAll([deposito,personajeNivel1,fondoNivel1,indicadorSuperior,indicadorCentena,barraSuperior])
-		return cajas.count({caja => caja.position().x().between(3,6) and caja.position().y().between(12,13)})
+		return cajas.count({caja => caja.position().x().between(3,6) and caja.position().y().between(11,12)})
 	}
 	method cajasListas(){
 		return self.cajasEnPosicion().equals(8)
-		/*const cajas = game.allVisuals().remove(deposito,personajeNivel1,fondoNivel1,indicadorSuperior,indicadorCentena)
-		return cajas.all({caja => caja.position().x().between(3,6) and caja.position().y().between(12,13)})*/
 	}
 }
 
-object colocar{
+object colocadores{
 	method caja(){
 		const posicionAleatoria = posiciones.posicionAleatoriaCajas()
 		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
@@ -129,7 +110,15 @@ object colocar{
 	method personajeNivel2EnPosicionAleatoria(){
 		
 	}
+	method laberintoLadrillo(){
+		14.time({ fila => laberinto.posiciones().get(fila-1).size().times({ columna => game})})
+		laberinto.posiciones().get({i => i.get(0) })
+		laberinto.posiciones().get(fila).forEach({ pos => game.addVisual(new ParedLadrillo(position = pos)) })
+	}
 }
 
+object actualizadores{
+	method cajasRestantes(){ indicadorCajas.valor(8 - verificadores.cajasEnPosicion()) }
+}
 
 

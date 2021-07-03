@@ -42,9 +42,8 @@ object indicadorCentena{
 }
 object indicadorCajas{
 	const property position = game.at(11,14)
-	var valor = 8
-	var property image = valor.toString() +".png"
-	method valor(unValor){ valor = unValor }
+	var property valor = 8
+	method image() = self.valor().toString() +".png"
 }
 
 

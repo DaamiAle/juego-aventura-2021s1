@@ -7,15 +7,7 @@ class Personaje { // Clase abstracta de personaje. Para usarla de plantilla
 	var property position
 	method image() = "player.png"
 	method mover(unSentido) { if (self.puedeMover(unSentido)) { self.position(unSentido.position(self)) } else { dialogos.personajeNoPuedeMoverse() } }
-	
-	method puedeMover(unSentido) {
-		var resultado = false
-		if (unSentido.equals(izquierda))	{ resultado = self.position().x() > 0 }
-		else if (unSentido.equals(derecha))	{ resultado = self.position().x() < game.width() - 1  }
-		else if (unSentido.equals(arriba))	{ resultado = self.position().y() < game.height() - 2 }
-		else 								{ resultado = self.position().y() > 0 }
-		return resultado
-	}
+	method puedeMover(unSentido) = unSentido.position(self).x().between(0,14) and unSentido.position(self).y().between(0,13)
 	method puedeColisionar()
 }
 
@@ -30,12 +22,11 @@ object personajeNivel1 inherits Personaje{
 		if (not objetos.isEmpty()) { 
 			objetos.forEach{ obj => obj.mover(unSentido) }
 			super(unSentido)
-			indicadorCajas.valor(8-verificadores.cajasEnPosicion())
 		}
 		else { 
 			super(unSentido)
-			indicadorCajas.valor(8-verificadores.cajasEnPosicion())
 		}
+		
 	}
 }
 

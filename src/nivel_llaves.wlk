@@ -1,5 +1,5 @@
 import wollok.game.*
-import utilidades.configuraciones
+import utilidades.*
 import personajes.personajeNivel2
 import elementos.*
 
@@ -13,6 +13,7 @@ object nivelLlaves {
 		keyboard.left().onPressDo 	{ personajeNivel2.mover(izquierda) 	}
 		keyboard.right().onPressDo 	{ personajeNivel2.mover(derecha) 	}
 		// colisiones, acá sí hacen falta
+		game.onTick( 10,"Actualizacion indicador", { personajeNivel2.actualizarIndicadorEnergia() } )
 		game.onCollideDo(personajeNivel2, { objeto => personajeNivel2.colisionar(objeto) })
 		// este es para probar, no es necesario dejarlo
 		keyboard.g().onPressDo({ self.terminarNivel() })
