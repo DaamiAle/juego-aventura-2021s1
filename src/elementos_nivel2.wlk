@@ -31,16 +31,6 @@ class Cofre inherits Objeto{
 class CeldaSorpresa inherits ParedLadrillo{
 	override method image() = ""
 }
-class Sendero {
-	const property position
-	method image() = "movimiento.png"
-}
-class BarraSuperior inherits Sendero{ override method image() = "barraSuperior.png" }
-
-class IndicadorEnergia inherits Sendero{ override method image() = "rayitoEnergia.png"}
-
-class Salida inherits Sendero { override method image() = "puertaSalida.png" }
-
 object fondoNivel2 inherits Objeto {
 	override method position() = game.at(0,0)
 	override method image() = "fondoNivel2.png"

@@ -12,27 +12,30 @@ class Personaje { // Clase abstracta de personaje. Para usarla de plantilla
 		var resultado = false
 		if (unSentido.equals(izquierda))	{ resultado = self.position().x() > 0 }
 		else if (unSentido.equals(derecha))	{ resultado = self.position().x() < game.width() - 1  }
-		else if (unSentido.equals(arriba))	{ resultado = self.position().y() < game.height() - 1 }
+		else if (unSentido.equals(arriba))	{ resultado = self.position().y() < game.height() - 2 }
 		else 								{ resultado = self.position().y() > 0 }
 		return resultado
 	}
 	method puedeColisionar()
 }
 
-object personajeNivel1 inherits Personaje{ 
+object personajeNivel1 inherits Personaje{
 	override method puedeColisionar() = false
 	override method puedeMover(unSentido) {
 		const objetos = game.getObjectsIn(unSentido.position(self))
 		return super(unSentido) and objetos.all{ obj => obj.puedeMover(unSentido)}
 	} 
-	
 	override method mover(unSentido) {
 		const objetos = game.getObjectsIn(unSentido.position(self))
 		if (not objetos.isEmpty()) { 
 			objetos.forEach{ obj => obj.mover(unSentido) }
 			super(unSentido)
+			indicadorCajas.valor(8-verificadores.cajasEnPosicion())
 		}
-		else { super(unSentido) }
+		else { 
+			super(unSentido)
+			indicadorCajas.valor(8-verificadores.cajasEnPosicion())
+		}
 	}
 }
 

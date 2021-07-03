@@ -1,11 +1,10 @@
 import wollok.game.*
-import utilidades.*
-import personajes.*
+import utilidades.configuraciones
+import personajes.personajeNivel2
 import elementos.*
-import nivel_elMataBichos.*
+
 
 object nivelLlaves {
-
 	method iniciarNivel() {
 		configuraciones.nivelLlaves()	
 		// Teclado
@@ -17,7 +16,6 @@ object nivelLlaves {
 		game.onCollideDo(personajeNivel2, { objeto => personajeNivel2.colisionar(objeto) })
 		// este es para probar, no es necesario dejarlo
 		keyboard.g().onPressDo({ self.terminarNivel() })
-		
 	}
 	
 	method terminarNivel() {

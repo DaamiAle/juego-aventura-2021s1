@@ -1,8 +1,8 @@
 import wollok.game.*
-import utilidades.*
-import personajes.*
+import utilidades.configuraciones
+import utilidades.verificadores
+import personajes.personajeNivel1
 import elementos.*
-import elementos_nivel1.*
 import nivel_llaves.*
 import dialogos.*
 
@@ -34,7 +34,7 @@ object nivelBloques {
 		
 		// Pasamos al siguiente nivel
 //		game.schedule(3000, {game.clear()})
-		//pasarANivel.aNivelLlaves()
+		nivelLlaves.iniciarNivel()
 	}
 		
 }

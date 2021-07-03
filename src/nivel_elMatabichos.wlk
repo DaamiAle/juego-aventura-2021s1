@@ -2,9 +2,9 @@ import wollok.game.*
 import utilidades.*
 import personajes.*
 import elementos.*
-import nivel_final.*
 
-object nivelElMataBichos {
+
+object nivelElMatabichos {
 	method iniciarNivel() {
 		configuraciones.nivelElMatabichos()	
 		// Teclado
