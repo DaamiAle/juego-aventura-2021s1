@@ -11,8 +11,8 @@ class Pollo inherits Objeto{
 	override method image() = "pollo.png"
 	override method puedeColisionar() = true
 }
-object llave inherits Objeto{
-	override method image() = "llave.png"
+object llaveNivel2 inherits Objeto{
+	override method image() = "llaveNivel2.png"
 	override method puedeColisionar() = true
 	method colisionarCon(unObjeto){
 		game.removeVisual(self)
@@ -42,8 +42,8 @@ object cofre inherits Objeto{
 	override method puedeColisionar() = false
 	method romperse(){
 		game.removeVisual(self)
-		llave.position(self.position())
-		game.addVisual(llave)
+		llaveNivel2.position(self.position())
+		game.addVisual(llaveNivel2)
 	}
 }
 class CeldaSorpresa inherits ParedLadrillo{
@@ -60,6 +60,9 @@ object fondoNivel2 inherits Objeto {
 	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
 	
+}
+class IndicadorCeldaSorpresa inherits ParedLadrillo {
+	override method image() = "celdaSorpresa.png"
 }
 object laberinto{
 	const property posiciones = [

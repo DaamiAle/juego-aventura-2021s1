@@ -39,7 +39,10 @@ object configuraciones{
 		// Muros
 		colocadores.laberintoLadrillo()
 		[game.at(3,11),game.at(4,8),game.at(6,5),game.at(10,0)].forEach({ pos => game.addVisual(new CeldaSorpresa(position=pos))})
+		//celdas sorpesa
+		[game.at(3,10),game.at(4,9),game.at(6,4),game.at(10,1)].forEach({ pos => game.addVisual(new IndicadorCeldaSorpresa(position=pos))})
 		// Llaves 3
+		colocadores.llave()
 		//3.times({ i => colocadores.llave() })
 		// Pollo 
 		//colocadores.pollo()
@@ -90,13 +93,14 @@ object colocadores{
 		}
 		else { self.pollo() }
 	}
-//	method llave(){
-//		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-//		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-//			game.addVisual( new Llave(position=posicionAleatoria) )
-//		}
-//		else { self.llave() }
-//	}
+	method llave(){
+		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
+		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
+			llaveNivel2.position(posicionAleatoria)
+			game.addVisual( llaveNivel2 )
+	}
+		else { self.llave() }
+	}
 	method modifier(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
 		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
