@@ -133,6 +133,11 @@ object actualizadores{
 			personajeNivel2.llavesEncontradas(0)
 		}
 	}
+	method personajeCruzoPuertaEn(nivel) {
+		if (game.hasVisual(puertaDeSalidaNivel2) and personajeNivel2.position() == puertaDeSalidaNivel2.position() ) { 
+			nivel.terminarNivel()
+		}
+	}
 }
 
 

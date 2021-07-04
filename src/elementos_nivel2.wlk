@@ -39,9 +39,7 @@ object puertaDeSalidaNivel2 inherits Objeto{
 	override method puedeColisionar() = true
 	override method position() = game.at(14,13)
 	method colisionarCon(unObjeto){
-		if (unObjeto.llavesEncontradas().equals(3)){
-			// terminarNivel
-		}
+		//resuelto por linea 19 de nivel_llaves.wlk
 	}
 }
 object cofreNivel2 inherits Objeto{

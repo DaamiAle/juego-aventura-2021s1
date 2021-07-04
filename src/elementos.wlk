@@ -79,6 +79,10 @@ object finalNivel1 {
 	method image() = "finNivel1.png"
 }
 
+object finalNivel2 {
+	method position() = game.origin()
+	method image() = "ganamos.png"
+}
 
 
 
