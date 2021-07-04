@@ -18,7 +18,7 @@ object nivelBloques {
 		game.onTick( 10,"Actualizacion indicador", { actualizadores.cajasRestantes() } )
 		
 		// Final
-		keyboard.t().onPressDo({ 
+		keyboard.n().onPressDo({ 
 			if (verificadores.personajeNivel1EstaEnPosicionDeSalida()){
 				if (verificadores.cajasListas()) { self.terminarNivel() } else { dialogos.cajasNivel1Faltantes() }
 			} else { dialogos.posicionDeSalidaIncorrecta() }
@@ -27,12 +27,11 @@ object nivelBloques {
 	
 	method terminarNivel() {
 		game.clear()
-		// Aca va la Transicion de nivel
-		game.onTick(1000,"Transicion de nivel",{ game.boardGround("finNivel1.png") })
-		// Pasamos al siguiente nivel
-//		
-		nivelLlaves.iniciarNivel()
+		game.addVisual(finalNivel1)
+		game.schedule(3000, { game.clear() nivelLlaves.iniciarNivel() })			
 	}
 		
 }
+
+
 

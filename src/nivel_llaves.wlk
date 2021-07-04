@@ -24,7 +24,7 @@ object nivelLlaves {
 		keyboard.left().onPressDo 	{ personajeNivel2.mover(izquierda) 	}
 		keyboard.right().onPressDo 	{ personajeNivel2.mover(derecha) 	}
 		// colisiones, acá sí hacen falta
-		game.onTick( 10,"Actualizacion indicador", { actualizadores.llavesRestantes() } )
+		game.onTick( 10,"Actualizacion indicador", { actualizadores.energiaRestante() actualizadores.llavesRestantes() } )
 		//game.onCollideDo(personajeNivel2, { objeto => personajeNivel2.colisionar(objeto) })
 		// este es para probar, no es necesario dejarlo
 		keyboard.g().onPressDo({ self.terminarNivel() })

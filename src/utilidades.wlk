@@ -42,10 +42,10 @@ object configuraciones{
 		// Llaves 3
 		//3.times({ i => colocadores.llave() })
 		// Pollo 
-		colocadores.pollo()
+		//colocadores.pollo()
 		// Modificador
-		modificador.position()
-		colocadores.modifier()
+		//modificador.position()
+		//colocadores.modifier()
 
 		// Personaje
 		personajeNivel2.position(game.origin())

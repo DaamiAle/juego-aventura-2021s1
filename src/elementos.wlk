@@ -74,6 +74,11 @@ object barraSuperior{
 	const property position = game.at(0,14)
 }
 
+object finalNivel1 {
+	method position() = game.origin()
+	method image() = "finNivel1.png"
+}
+
 
 
 
