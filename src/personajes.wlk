@@ -65,9 +65,8 @@ object personajeNivel2 inherits Personaje{
 		}
 	}
 	method aplicarCeldaSorpresa(){
-		const efectoNumero = aleatorios.numeroUnidad() % 5
 		const efectos = [{self.restarEnergia(aleatorios.numeroDecena())},{self.sumarEnergia(aleatorios.numeroDecena())},{self.teletransportar()},{colocadores.pollo()}]
-		efectos.get(efectoNumero).apply()
+		efectos.anyOne().apply()
 	}
 	method teletransportar(){
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()

@@ -81,7 +81,7 @@ object finalNivel1 {
 
 object finalNivel2 {
 	method position() = game.origin()
-	method image() = "ganamos.png"
+	method image() = "victoria.png"
 }
 
 object gameOver {

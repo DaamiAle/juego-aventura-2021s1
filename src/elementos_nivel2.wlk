@@ -8,7 +8,6 @@ class ParedLadrillo inherits Objeto{
 }
 class Pollo inherits Objeto{
 	const property energia
-	//method comer() = energia
 	override method image() = "pollo.png"
 	override method puedeColisionar() = true
 	method colisionarCon(unObjeto){
@@ -56,7 +55,7 @@ class ActuadorCeldaSorpresa inherits ParedLadrillo{
 	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
 	method colisionarCon(unObjeto){
-//		unObjeto.aplicarCeldaSorpresa()
+		unObjeto.aplicarCeldaSorpresa()
 	}
 }
 object fondoNivel2 inherits Objeto {
