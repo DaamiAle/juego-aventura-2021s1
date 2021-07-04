@@ -21,7 +21,7 @@ object dialogos{
 		game.say(personajeNivel1, "No puedo pasar de nivel desde aqui.")
 		game.say(personajeNivel1, "Debo estar debajo del deposito.")
 	}
-	method personajeNoPuedeMoverse(){
-		game.say(personajeNivel1,"Personaje: No puedo moverme en esa direccion")
+	method personajeNoPuedeMoverse(unPersonaje){
+		game.say(unPersonaje,"Personaje: No puedo moverme en esa direccion")
 	}
 }

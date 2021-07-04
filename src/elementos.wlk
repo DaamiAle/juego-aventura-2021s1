@@ -28,17 +28,17 @@ object izquierda{
 object indicadorUnidad{
 	const property position = game.at(13,14)
 	var property valor = 0
-	var property image = self.valor().toString() +".png"
+	method image() = self.valor().toString() +".png"
 }
 object indicadorDecena{
 	const property position = game.at(12,14)
 	var property valor = 0
-	var property image = self.valor().toString() +".png"
+	method image() = self.valor().toString() +".png"
 }
 object indicadorCentena{
 	const property position = game.at(11,14)
 	var property valor = 0
-	var property image = self.valor().toString() +".png"
+	method image() = self.valor().toString() +".png"
 }
 object indicadorCajas{
 	const property position = game.at(11,14)
@@ -63,7 +63,7 @@ object barraSuperior{
 object indicadorSuperior{
 	const property position = game.at(10,14)
 	var property nivel = 1
-	var property image = "indicadorNivel"+ self.nivel().toString() +".png"
+	method image() = "indicadorNivel"+ self.nivel().toString() +".png"
 }
 
 

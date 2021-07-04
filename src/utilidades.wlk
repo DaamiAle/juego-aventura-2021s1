@@ -27,8 +27,8 @@ object configuraciones{
 	}
 	method nivelLlaves(){
 		// Fondo
-		game.addVisual(barraSuperior)
 		game.addVisual(fondoNivel2)
+		game.addVisual(barraSuperior)
 		indicadorSuperior.nivel(2)
 		game.addVisual(indicadorSuperior)
 		game.addVisual(indicadorCentena)
@@ -36,16 +36,16 @@ object configuraciones{
 		game.addVisual(indicadorUnidad)
 		// Muros
 		colocadores.laberintoLadrillo()
-//		14.times({ fila => colocadores.muros(fila-1)/*.get(fila-1).forEach({pos => game.addVisual(new ParedLadrillo(position=pos))}) */ })
+		[game.at(3,11),game.at(4,8),game.at(6,5),game.at(10,0)].forEach({ pos => game.addVisual(new CeldaSorpresa(position=pos))})
 		// Llaves 3
-		3.times({ i => colocadores.llave() })
+		//3.times({ i => colocadores.llave() })
 		// Pollos 5
-		5.times({ i => colocadores.pollo() })
+		//5.times({ i => colocadores.pollo() })
 		// Modificadores 3
-		4.times({ posicion => colocadores.modificador(posicion) })
+		//4.times({ posicion => colocadores.modificador(posicion) })
 
 		// Personaje
-		personajeNivel2.position(game.at(1,game.width()-3))
+		personajeNivel2.position(game.origin())
 		game.addVisual(personajeNivel2)
 	}
 	method nivelElMatabichos(){
@@ -79,41 +79,36 @@ object colocadores{
 		}
 		else { self.caja() }
 	}
-	
-	method pollo(){
-		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-			game.addVisual( new Pollo(energia=aleatorios.numeroDecena(),position=posicionAleatoria) )
-		}
-		else { self.pollo() }
-	}
-	method llave(){
-		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-			game.addVisual( new Llave(position=posicionAleatoria) )
-		}
-		else { self.llave() }
-	}
-	method modificador(posicion){
-		game.addVisual( new Modificador(tipo=aleatorios.numeroUnidad()%3,position=posicion) )
-	}
-	method cofre(){
-		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-			game.addVisual( new Cofre(position=posicionAleatoria) )
-		}
-		else { self.cofre() }
-	}
-	method puertaSalidaNivel2(){
-		
-	}
-	method personajeNivel2EnPosicionAleatoria(){
-		
-	}
+
+//	method pollo(){
+//		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
+//		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
+//			game.addVisual( new Pollo(energia=aleatorios.numeroDecena(),position=posicionAleatoria) )
+//		}
+//		else { self.pollo() }
+//	}
+//	method llave(){
+//		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
+//		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
+//			game.addVisual( new Llave(position=posicionAleatoria) )
+//		}
+//		else { self.llave() }
+//	}
+//	method modificador(posicion){
+//		game.addVisual( new Modificador(tipo=aleatorios.numeroUnidad()%3,position=posicion) )
+//	}
+//	method cofre(){
+//		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
+//		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
+//			game.addVisual( new Cofre(position=posicionAleatoria) )
+//		}
+//		else { self.cofre() }
+//	}
+
 	method laberintoLadrillo(){
-		14.time({ fila => laberinto.posiciones().get(fila-1).size().times({ columna => game})})
-		laberinto.posiciones().get({i => i.get(0) })
-		laberinto.posiciones().get(fila).forEach({ pos => game.addVisual(new ParedLadrillo(position = pos)) })
+		14.times({ fila => laberinto.posiciones().get(fila-1).forEach({ columna => game.addVisual(new ParedLadrillo(position=columna))})})
+		//laberinto.posiciones().get({i => i.get(0) })
+		//laberinto.posiciones().get(fila).forEach({ pos => game.addVisual(new ParedLadrillo(position = pos)) })
 	}
 }
 

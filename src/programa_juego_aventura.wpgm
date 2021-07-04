@@ -9,7 +9,7 @@ program juego_aventura {
 	game.width(15)
 	game.boardGround("fondoBlanco.png")
 	//game.ground("plataformaPiedra.png")
-
+	
 	//nivelBloques.iniciarNivel()
 	//fondeo.aplicar()
 	nivelLlaves.iniciarNivel()

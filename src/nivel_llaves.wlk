@@ -4,6 +4,17 @@ import personajes.personajeNivel2
 import elementos.*
 
 
+import elementos_nivel2.*
+
+object fondeo{
+	method aplicar(){
+		game.addVisual(barraSuperior)
+		game.addVisual(new CeldaSorpresa(position=game.at(3,10)))
+		game.addVisual(new CeldaSorpresa(position=game.at(4,9)))
+		game.addVisual(new CeldaSorpresa(position=game.at(6,4)))
+		game.addVisual(new CeldaSorpresa(position=game.at(10,1)))
+	}
+}
 object nivelLlaves {
 	method iniciarNivel() {
 		configuraciones.nivelLlaves()	
@@ -14,7 +25,7 @@ object nivelLlaves {
 		keyboard.right().onPressDo 	{ personajeNivel2.mover(derecha) 	}
 		// colisiones, acá sí hacen falta
 		game.onTick( 10,"Actualizacion indicador", { personajeNivel2.actualizarIndicadorEnergia() } )
-		game.onCollideDo(personajeNivel2, { objeto => personajeNivel2.colisionar(objeto) })
+		//game.onCollideDo(personajeNivel2, { objeto => personajeNivel2.colisionar(objeto) })
 		// este es para probar, no es necesario dejarlo
 		keyboard.g().onPressDo({ self.terminarNivel() })
 	}
