@@ -40,6 +40,7 @@ object personajeNivel2 inherits Personaje{
 	override method mover(unSentido) { 
 		super(unSentido)
 		self.restarEnergia(1)
+		
 	}
 	method comer(energiaPollo) {
 		if (modificadorDeComida != null) {

@@ -19,19 +19,21 @@ object nivelLlaves {
 			actualizadores.llavesRestantes() 
 			actualizadores.llavesListas() 
 			actualizadores.personajeCruzoPuertaEn(self)
+			actualizadores.energiaDePersonajeEn(self)
 		} )
 		game.onCollideDo(personajeNivel2, { objeto => personajeNivel2.colisionar(objeto) })
 		//agregar contador de llaves
 	}
 	
-	method terminarNivel() {
-		// es muy parecido al terminar() de nivelBloques
-		// el perder() también va a ser parecido
-		// game.clear() limpia visuals, teclado, colisiones y acciones
+	method ganarNivel() {
 		game.clear()
 		game.addVisual(finalNivel2)
 		game.schedule(2500, { game.clear() game.schedule(3000, { game.stop() }) })
 	}
 	
-	
+	method perderNivel() {
+		game.clear()
+		game.addVisual(gameOver)
+		game.schedule(3000, { game.stop() }) 
+	}
 }
