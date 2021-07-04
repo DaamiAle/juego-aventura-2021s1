@@ -32,7 +32,7 @@ object personajeNivel1 inherits Personaje{
 
 object personajeNivel2 inherits Personaje{
 	var property llavesEncontradas = 0
-	var modificadorDeComida = null
+	var property modificadorDeComida = null
 	var property energia = 40
 	method cambiarModificador(nuevoMod) { modificadorDeComida = nuevoMod }
 	//override method puedeColisionar() = true
@@ -66,6 +66,7 @@ object personajeNivel2 inherits Personaje{
 	}
 	method aplicarCeldaSorpresa(){
 		const efectos = [{self.restarEnergia(aleatorios.numeroDecena())},{self.sumarEnergia(aleatorios.numeroDecena())},{self.teletransportar()},{colocadores.pollo()}]
+		
 		efectos.anyOne().apply()
 	}
 	method teletransportar(){

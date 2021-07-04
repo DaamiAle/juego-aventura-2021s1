@@ -1,6 +1,7 @@
 import elementos.*
 import utilidades.colocadores
 import wollok.game.game
+import utilidades.aleatorios
 
 class ParedLadrillo inherits Objeto{
 	override method image() = "paredDeLadrillo.png"
@@ -26,12 +27,20 @@ object llaveNivel2 inherits Objeto{
 	}
 }
 object modificador inherits Objeto{
+	var property efecto = [{self.duplicador(energiaPollo) } , {self.reforzador(energiaPollo)} , {self.tripleONada(energiaPollo)} ]
+	
 	override method image() = ""
 	override method puedeColisionar() = true
-	method efecto() = 1
+	override method puedeMover(unSentido) = true
 	method colisionarCon(unObjeto){
 		game.removeVisual(self)
+		unObjeto.modificadorDeComida(self.efecto())
 	}
+	method duplicador(energiaPollo) {
+		
+	}
+	method reforzador(energiaPollo) {}
+	method tripleONada(energiaPollo) {}
 }
 object puertaDeSalidaNivel2 inherits Objeto{
 	override method image() = "puertaSalida.png"
