@@ -45,14 +45,16 @@ object configuraciones{
 		colocadores.objetoNivel2(llaveNivel2)
 		//3.times({ i => colocadores.llave() })
 		// Pollo 
-		//colocadores.pollo()
+		colocadores.pollo()
 		// Modificador
 		//modificador.position()
 		//colocadores.modifier()
-
+		
 		// Personaje
 		personajeNivel2.position(game.origin())
 		game.addVisual(personajeNivel2)
+		//Salida
+		
 	}
 	method nivelElMatabichos(){
 		
@@ -75,6 +77,9 @@ object verificadores{
 	method cajasListas(){
 		return self.cajasEnPosicion().equals(8)
 	}
+	method llavesListas() {
+		return personajeNivel2.llavesEncontradas().equals(3)
+	}
 }
 
 object colocadores{
@@ -93,39 +98,16 @@ object colocadores{
 		}
 		else { self.pollo() }
 	}
+	
 	method objetoNivel2(objeto) {
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
 		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
 			objeto.position(posicionAleatoria)
-			game.addVisual( objeto )
-	}
+			game.addVisual( objeto )	
+		}
 		else { self.objetoNivel2(objeto) }
 	}
-//	method llave(){
-//		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-//		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-//			llaveNivel2.position(posicionAleatoria)
-//			game.addVisual( llaveNivel2 )
-//	}
-//		else { self.llave() }
-//	}
-//	method modifier(){
-//		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-//		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-//			modificador.position(posicionAleatoria)
-//			game.addVisual(modificador)
-//		}
-//		else { self.modifier() }
-//	}
-//	method cofre(){
-//		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-//		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-//			cofreNivel2.position(posicionAleatoria)
-//			game.addVisual( cofreNivel2 )
-//		}
-//		else { self.cofre() }
-//	}
-
+	
 	method laberintoLadrillo(){
 		14.times({ fila => laberinto.posiciones().get(fila-1).forEach({ columna => game.addVisual(new ParedLadrillo(position=columna))})})
 	}
@@ -144,6 +126,13 @@ object actualizadores{
 	method llavesRestantes() {
 		indicadorNumericoSecundario.valor(3 - personajeNivel2.llavesEncontradas())
 	} 
+	method llavesListas() {
+		if (verificadores.llavesListas()) {
+			game.removeVisual(llaveNivel2)
+			game.addVisual(puertaDeSalidaNivel2)
+			personajeNivel2.llavesEncontradas(0)
+		}
+	}
 }
 
 

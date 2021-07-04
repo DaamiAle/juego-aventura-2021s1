@@ -8,9 +8,14 @@ class ParedLadrillo inherits Objeto{
 }
 class Pollo inherits Objeto{
 	const property energia
-	method comer() = energia
+	//method comer() = energia
 	override method image() = "pollo.png"
-	override method puedeColisionar() = false
+	override method puedeColisionar() = true
+	method colisionarCon(unObjeto){
+		game.removeVisual(self)
+		unObjeto.comer(self.energia())
+		colocadores.pollo()
+	}
 }
 object llaveNivel2 inherits Objeto{
 	override method image() = "llaveNivel2.png"
@@ -32,8 +37,9 @@ object modificador inherits Objeto{
 object puertaDeSalidaNivel2 inherits Objeto{
 	override method image() = "puertaSalida.png"
 	override method puedeColisionar() = true
+	override method position() = game.at(14,13)
 	method colisionarCon(unObjeto){
-		if (unObjeto.llavesRecolectadas().equals(3)){
+		if (unObjeto.llavesEncontradas().equals(3)){
 			// terminarNivel
 		}
 	}

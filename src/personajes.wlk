@@ -41,8 +41,13 @@ object personajeNivel2 inherits Personaje{
 		super(unSentido)
 		self.restarEnergia(1)
 	}
-	method comer() {
-		//aca irian los pollos
+	method comer(energiaPollo) {
+		if (modificadorDeComida != null) {
+			//efecto del modificador
+		}
+		else {
+			self.sumarEnergia(energiaPollo)
+		}
 	}
 	method patearCofre(){
 		// aca va un recorrido de direcciones y patear los objetos que estan en las celdas adyacentes ortogonales
