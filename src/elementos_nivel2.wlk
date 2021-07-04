@@ -20,10 +20,13 @@ object llave inherits Objeto{
 		game.addVisual(cofre)
 	}
 }
-class Modificador inherits Objeto{
-	const property tipo
+object modificador inherits Objeto{
 	override method image() = ""
 	override method puedeColisionar() = true
+	method efecto() = 1
+	method colisionarCon(unObjeto){
+		game.removeVisual(self)
+	}
 }
 object puertaDeSalidaNivel2 inherits Objeto{
 	override method image() = "puertaSalida.png"
@@ -44,7 +47,7 @@ object cofre inherits Objeto{
 	}
 }
 class CeldaSorpresa inherits ParedLadrillo{
-	override method image() = "plataformaDePiedra.png"
+	override method image() = "plataformaPiedra.png"
 	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
 	method colisionarCon(unObjeto){
@@ -52,7 +55,7 @@ class CeldaSorpresa inherits ParedLadrillo{
 	}
 }
 object fondoNivel2 inherits Objeto {
-	override method position() = game.at(0,0)
+	override method position() = game.origin()
 	override method image() = "fondoNivel2.png"
 	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true

@@ -41,14 +41,6 @@ object personajeNivel2 inherits Personaje{
 		super(unSentido)
 		self.restarEnergia(1)
 	}
-	method actualizarIndicadorEnergia(){
-		const unidad = self.energia() % 10
-		const decena = self.energia().div(10) % 10
-		const centena = self.energia().div(100)
-		indicadorUnidad.valor(unidad)
-		indicadorDecena.valor(decena)
-		indicadorCentena.valor(centena)
-	}
 	method comer() {
 		//aca irian los pollos
 	}
@@ -68,7 +60,7 @@ object personajeNivel2 inherits Personaje{
 	}
 	method aplicarCeldaSorpresa(){
 		const efectoNumero = aleatorios.numeroUnidad() % 5
-		const efectos = [{self.restarEnergia(aleatorios.numeroDecena())},{self.sumarEnergia(aleatorios.numeroDecena())},{self.teletransportar()},{},{}]
+		const efectos = [{self.restarEnergia(aleatorios.numeroDecena())},{self.sumarEnergia(aleatorios.numeroDecena())},{self.teletransportar()},{colocadores.pollo()}]
 		efectos.get(efectoNumero).apply()
 	}
 	method teletransportar(){

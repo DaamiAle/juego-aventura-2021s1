@@ -26,24 +26,38 @@ object izquierda{
 	method opuesto() = derecha
 }
 object indicadorUnidad{
-	const property position = game.at(13,14)
 	var property valor = 0
+	method position() = game.at(13,14)
 	method image() = self.valor().toString() +".png"
 }
 object indicadorDecena{
-	const property position = game.at(12,14)
 	var property valor = 0
+	method position() = game.at(12,14)
 	method image() = self.valor().toString() +".png"
 }
 object indicadorCentena{
-	const property position = game.at(11,14)
 	var property valor = 0
+	method position() = game.at(11,14)
 	method image() = self.valor().toString() +".png"
 }
-object indicadorCajas{
-	const property position = game.at(11,14)
-	var property valor = 8
+//object indicadorCajas{
+//	const property position = game.at(11,14)
+//	var property valor = 8
+//	method image() = self.valor().toString() +".png"
+//}
+object indicadorNumericoSecundario{
+	var property valor = 3
+	method position() = game.at(8,14)
 	method image() = self.valor().toString() +".png"
+}
+object indicadorSecundario{
+	method position() = game.at(7,14)
+	method image() = ".png"
+}
+object indicadorPrimario{
+	const property position = game.at(10,14)
+	var property nivel = 1
+	method image() = "indicadorNivel"+ self.nivel().toString() +".png"
 }
 
 
@@ -60,11 +74,7 @@ object barraSuperior{
 	const property position = game.at(0,14)
 }
 
-object indicadorSuperior{
-	const property position = game.at(10,14)
-	var property nivel = 1
-	method image() = "indicadorNivel"+ self.nivel().toString() +".png"
-}
+
 
 
 

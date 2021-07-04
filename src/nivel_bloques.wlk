@@ -28,7 +28,7 @@ object nivelBloques {
 	method terminarNivel() {
 		game.clear()
 		// Aca va la Transicion de nivel
-		
+		game.onTick(1000,"Transicion de nivel",{ game.boardGround("finNivel1.png") })
 		// Pasamos al siguiente nivel
 //		
 		nivelLlaves.iniciarNivel()
