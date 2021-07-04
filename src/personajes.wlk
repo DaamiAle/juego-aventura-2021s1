@@ -2,6 +2,7 @@ import wollok.game.*
 import utilidades.*
 import elementos.*
 import dialogos.*
+import elementos_nivel2.modificador
 
 class Personaje { // Clase abstracta de personaje. Para usarla de plantilla
 	var property position
@@ -34,8 +35,7 @@ object personajeNivel2 inherits Personaje{
 	var property llavesEncontradas = 0
 	var property modificadorDeComida = null
 	var property energia = 40
-	method cambiarModificador(nuevoMod) { modificadorDeComida = nuevoMod }
-	//override method puedeColisionar() = true
+	
 	override method puedeMover(unSentido) = super(unSentido) and self.energia() > 0 and game.getObjectsIn(unSentido.position(self)).all{ obj => obj.puedeColisionar()}
 	override method mover(unSentido) { 
 		super(unSentido)
@@ -43,12 +43,18 @@ object personajeNivel2 inherits Personaje{
 		
 	}
 	method comer(energiaPollo) {
-		if (modificadorDeComida != null) {
-			//efecto del modificador
+		if (self.modificadorDeComida() != null) {
+			modificador.energiaPollo(energiaPollo) 
+			self.aplicarModificador() 
+		//	modificador.efectos().get(self.modificadorDeComida()).apply()
 		}
 		else {
 			self.sumarEnergia(energiaPollo)
 		}
+	}
+	method aplicarModificador() {
+		const efectos = [{modificador.duplicador(self)} , {modificador.reforzador(self)} , {modificador.tripleONada(self)} ]
+		efectos.get(self.modificadorDeComida()).apply()
 	}
 	method patearCofre(){
 		// aca va un recorrido de direcciones y patear los objetos que estan en las celdas adyacentes ortogonales

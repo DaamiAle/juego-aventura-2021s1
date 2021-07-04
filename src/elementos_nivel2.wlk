@@ -27,20 +27,28 @@ object llaveNivel2 inherits Objeto{
 	}
 }
 object modificador inherits Objeto{
-	var property efecto = [{self.duplicador(energiaPollo) } , {self.reforzador(energiaPollo)} , {self.tripleONada(energiaPollo)} ]
+//	var property efectos = [{self.duplicador() } , {self.reforzador()} , {self.tripleONada()} ]
+	var property energiaPollo = 0
 	
 	override method image() = ""
 	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
 	method colisionarCon(unObjeto){
 		game.removeVisual(self)
-		unObjeto.modificadorDeComida(self.efecto())
+		unObjeto.modificadorDeComida(aleatorios.numeroUnidad() % 3)
 	}
-	method duplicador(energiaPollo) {
-		
+	method duplicador(personaje) {
+		personaje.sumarEnergia(self.energiaPollo() * 2)
 	}
-	method reforzador(energiaPollo) {}
-	method tripleONada(energiaPollo) {}
+	method reforzador(personaje) {
+		if (personaje.energia() < 10) {personaje.sumarEnergia(20)}
+		self.duplicador(personaje)   
+	}
+	method tripleONada(personaje) {
+		if(personaje.energia().even()) {
+			personaje.sumarEnergia(self.energiaPollo() *3)
+		}
+	}
 }
 object puertaDeSalidaNivel2 inherits Objeto{
 	override method image() = "puertaSalida.png"
