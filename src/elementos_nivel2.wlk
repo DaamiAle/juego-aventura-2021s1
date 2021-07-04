@@ -1,4 +1,5 @@
 import elementos.*
+import utilidades.colocadores
 import wollok.game.game
 
 class ParedLadrillo inherits Objeto{
@@ -9,15 +10,15 @@ class Pollo inherits Objeto{
 	const property energia
 	method comer() = energia
 	override method image() = "pollo.png"
-	override method puedeColisionar() = true
+	override method puedeColisionar() = false
 }
 object llaveNivel2 inherits Objeto{
 	override method image() = "llaveNivel2.png"
 	override method puedeColisionar() = true
 	method colisionarCon(unObjeto){
 		game.removeVisual(self)
-		unObjeto.llavesRecolectadas(unObjeto.llavesRecolectadas() + 1)
-		game.addVisual(cofre)
+		unObjeto.llavesEncontradas(unObjeto.llavesEncontradas() + 1)
+		colocadores.objetoNivel2(self)
 	}
 }
 object modificador inherits Objeto{
@@ -37,7 +38,7 @@ object puertaDeSalidaNivel2 inherits Objeto{
 		}
 	}
 }
-object cofre inherits Objeto{
+object cofreNivel2 inherits Objeto{
 	override method image() = "cofre.png"
 	override method puedeColisionar() = false
 	method romperse(){
@@ -46,18 +47,18 @@ object cofre inherits Objeto{
 		game.addVisual(llaveNivel2)
 	}
 }
-class CeldaSorpresa inherits ParedLadrillo{
+class ActuadorCeldaSorpresa inherits ParedLadrillo{
 	override method image() = "plataformaPiedra.png"
 	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
 	method colisionarCon(unObjeto){
-		unObjeto.aplicarCeldaSorpresa()
+//		unObjeto.aplicarCeldaSorpresa()
 	}
 }
 object fondoNivel2 inherits Objeto {
 	override method position() = game.origin()
 	override method image() = "fondoNivel2.png"
-	override method puedeColisionar() = true
+	override method puedeColisionar() = false
 	override method puedeMover(unSentido) = true
 	
 }

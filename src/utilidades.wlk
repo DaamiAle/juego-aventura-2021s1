@@ -38,11 +38,11 @@ object configuraciones{
 		game.addVisual(indicadorUnidad)
 		// Muros
 		colocadores.laberintoLadrillo()
-		[game.at(3,11),game.at(4,8),game.at(6,5),game.at(10,0)].forEach({ pos => game.addVisual(new CeldaSorpresa(position=pos))})
 		//celdas sorpesa
+		[game.at(3,11),game.at(4,8),game.at(6,5),game.at(10,0)].forEach({ pos => game.addVisual(new ActuadorCeldaSorpresa(position=pos))})  
 		[game.at(3,10),game.at(4,9),game.at(6,4),game.at(10,1)].forEach({ pos => game.addVisual(new IndicadorCeldaSorpresa(position=pos))})
 		// Llaves 3
-		colocadores.llave()
+		colocadores.objetoNivel2(llaveNivel2)
 		//3.times({ i => colocadores.llave() })
 		// Pollo 
 		//colocadores.pollo()
@@ -93,26 +93,35 @@ object colocadores{
 		}
 		else { self.pollo() }
 	}
-	method llave(){
+	method objetoNivel2(objeto) {
 		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
 		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-			llaveNivel2.position(posicionAleatoria)
-			game.addVisual( llaveNivel2 )
+			objeto.position(posicionAleatoria)
+			game.addVisual( objeto )
 	}
-		else { self.llave() }
+		else { self.objetoNivel2(objeto) }
 	}
-	method modifier(){
-		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
-		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-			modificador.position(posicionAleatoria)
-			game.addVisual(modificador)
-		}
-		else { self.modifier() }
-	}
+//	method llave(){
+//		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
+//		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
+//			llaveNivel2.position(posicionAleatoria)
+//			game.addVisual( llaveNivel2 )
+//	}
+//		else { self.llave() }
+//	}
+//	method modifier(){
+//		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
+//		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
+//			modificador.position(posicionAleatoria)
+//			game.addVisual(modificador)
+//		}
+//		else { self.modifier() }
+//	}
 //	method cofre(){
 //		const posicionAleatoria = posiciones.asignarPosicionAleatoria()
 //		if (posiciones.posicionEstaVacia(posicionAleatoria)) { 
-//			game.addVisual( new Cofre(position=posicionAleatoria) )
+//			cofreNivel2.position(posicionAleatoria)
+//			game.addVisual( cofreNivel2 )
 //		}
 //		else { self.cofre() }
 //	}
