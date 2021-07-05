@@ -41,20 +41,15 @@ object configuraciones{
 		//celdas sorpesa
 		[game.at(3,11),game.at(4,8),game.at(6,5),game.at(10,0)].forEach({ pos => game.addVisual(new ActuadorCeldaSorpresa(position=pos))})  
 		[game.at(3,10),game.at(4,9),game.at(6,4),game.at(10,1)].forEach({ pos => game.addVisual(new IndicadorCeldaSorpresa(position=pos))})
-		// Llaves 3
+		// Llaves 
 		colocadores.objetoNivel2(llaveNivel2)
-		//3.times({ i => colocadores.llave() })
 		// Pollo 
 		colocadores.pollo()
 		// Modificador
-		//modificador.position()
-		//colocadores.modifier()
-		
+		colocadores.objetoNivel2(modificador)
 		// Personaje
 		personajeNivel2.position(game.origin())
-		game.addVisual(personajeNivel2)
-		//Salida
-		
+		game.addVisual(personajeNivel2)		
 	}
 	method nivelElMatabichos(){
 		
@@ -128,7 +123,7 @@ object actualizadores{
 	} 
 	method llavesListas() {
 		if (verificadores.llavesListas()) {
-			game.removeVisual(llaveNivel2)
+			try { game.removeVisual(llaveNivel2) } catch e { game.removeVisual(cofreNivel2) }
 			game.addVisual(puertaDeSalidaNivel2)
 			personajeNivel2.llavesEncontradas(0)
 		}

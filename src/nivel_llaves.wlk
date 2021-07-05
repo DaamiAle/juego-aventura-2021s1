@@ -13,6 +13,7 @@ object nivelLlaves {
 		keyboard.down().onPressDo 	{ personajeNivel2.mover(abajo) 		}
 		keyboard.left().onPressDo 	{ personajeNivel2.mover(izquierda) 	}
 		keyboard.right().onPressDo 	{ personajeNivel2.mover(derecha) 	}
+		keyboard.p().onPressDo { personajeNivel2.patear() }
 		// colisiones, acá sí hacen falta
 		game.onTick( 10,"Actualizacion indicador", { 
 			actualizadores.energiaRestante() 

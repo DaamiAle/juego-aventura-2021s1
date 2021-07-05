@@ -23,19 +23,20 @@ object llaveNivel2 inherits Objeto{
 	method colisionarCon(unObjeto){
 		game.removeVisual(self)
 		unObjeto.llavesEncontradas(unObjeto.llavesEncontradas() + 1)
-		colocadores.objetoNivel2(self)
+		if (aleatorios.numeroUnidad().even()) { colocadores.objetoNivel2(cofreNivel2) } 
+		else { colocadores.objetoNivel2(self) }		
 	}
 }
 object modificador inherits Objeto{
-//	var property efectos = [{self.duplicador() } , {self.reforzador()} , {self.tripleONada()} ]
 	var property energiaPollo = 0
 	
-	override method image() = ""
+	override method image() = "modificador.png"
 	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
 	method colisionarCon(unObjeto){
 		game.removeVisual(self)
 		unObjeto.modificadorDeComida(aleatorios.numeroUnidad() % 3)
+		colocadores.objetoNivel2(self)	
 	}
 	method duplicador(personaje) {
 		personaje.sumarEnergia(self.energiaPollo() * 2)
@@ -72,6 +73,7 @@ class ActuadorCeldaSorpresa inherits ParedLadrillo{
 	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
 	method colisionarCon(unObjeto){
+		game.removeVisual(self)
 		unObjeto.aplicarCeldaSorpresa()
 	}
 }

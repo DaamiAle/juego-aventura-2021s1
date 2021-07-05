@@ -3,17 +3,17 @@ import utilidades.*
 import elementos.*
 import dialogos.*
 import elementos_nivel2.modificador
+import elementos_nivel2.cofreNivel2
 
 class Personaje { // Clase abstracta de personaje. Para usarla de plantilla
 	var property position
 	method image() = "player.png"
 	method mover(unSentido) { if (self.puedeMover(unSentido)) { self.position(unSentido.position(self)) } else { dialogos.personajeNoPuedeMoverse(self) } }
 	method puedeMover(unSentido) = unSentido.position(self).x().between(0,14) and unSentido.position(self).y().between(0,13)
-	//method puedeColisionar()
+	
 }
 
 object personajeNivel1 inherits Personaje{
-	//override method puedeColisionar() = false
 	override method puedeMover(unSentido) {
 		const objetos = game.getObjectsIn(unSentido.position(self))
 		return super(unSentido) and objetos.all{ obj => obj.puedeMover(unSentido)}
@@ -46,7 +46,6 @@ object personajeNivel2 inherits Personaje{
 		if (self.modificadorDeComida() != null) {
 			modificador.energiaPollo(energiaPollo) 
 			self.aplicarModificador() 
-		//	modificador.efectos().get(self.modificadorDeComida()).apply()
 		}
 		else {
 			self.sumarEnergia(energiaPollo)
@@ -56,8 +55,15 @@ object personajeNivel2 inherits Personaje{
 		const efectos = [{modificador.duplicador(self)} , {modificador.reforzador(self)} , {modificador.tripleONada(self)} ]
 		efectos.get(self.modificadorDeComida()).apply()
 	}
-	method patearCofre(){
-		// aca va un recorrido de direcciones y patear los objetos que estan en las celdas adyacentes ortogonales
+	method patear(){
+		self.restarEnergia(6)
+		[arriba, abajo, izquierda, derecha].forEach({ unSentido => self.abrirCofre(unSentido) })
+	}
+	method abrirCofre(unSentido) {
+		const objetos = game.getObjectsIn(unSentido.position(self))
+		if (objetos.contains(cofreNivel2)) {
+			cofreNivel2.romperse()
+		}
 	}
 	method sumarEnergia(unValor){
 		self.energia(999.min(self.energia() + unValor))
