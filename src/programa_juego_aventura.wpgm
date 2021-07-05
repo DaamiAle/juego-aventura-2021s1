@@ -1,6 +1,7 @@
 import wollok.game.*
 import nivel_bloques.*
 import nivel_llaves.*
+import nivel_elMatabichos.*
 
 program juego_aventura {
 	game.cellSize(40)
@@ -10,6 +11,7 @@ program juego_aventura {
 	game.boardGround("fondoBlanco.png")
 	//game.ground("plataformaPiedra.png")
 	//nivelBloques.iniciarNivel()
-	nivelLlaves.iniciarNivel()
+	//nivelLlaves.iniciarNivel()
+	nivelElMatabichos.iniciarNivel()
 	game.start()
 }

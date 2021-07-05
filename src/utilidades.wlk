@@ -3,11 +3,13 @@ import elementos.*
 import personajes.*
 import elementos_nivel1.*
 import elementos_nivel2.*
+import elementos_nivel3.*
 
 object aleatorios{
 	method numeroCentena() 	= 1.randomUpTo(9).truncate(0) * 100
 	method numeroDecena() 	= 1.randomUpTo(9).truncate(0) * 10
 	method numeroUnidad() 	= 1.randomUpTo(9).truncate(0)
+	method sentido() = [arriba, abajo, izquierda, derecha].get(self.numeroUnidad() % 4)
 }
 
 object configuraciones{
@@ -52,13 +54,21 @@ object configuraciones{
 		game.addVisual(personajeNivel2)		
 	}
 	method nivelElMatabichos(){
-		
+		//Fondo
+		game.addVisual(fondoNivel3)
+		game.addVisual(barraSuperior)
+		//Enemigos
+		game.addVisual(new Enemigo(position = posiciones.posicionEnemigo()))
+		//Personaje
+		personajeNivel3.position(game.origin())
+		game.addVisual(personajeNivel3)
 	}
 }
 object posiciones {
 	method posicionAleatoriaCajas() 	= game.at( 1.randomUpTo(game.width()-2).truncate(0), 1.randomUpTo(game.height()-5).truncate(0) )
 	method asignarPosicionAleatoria() 	= game.at( 0.randomUpTo(game.width()-1).truncate(0), 0.randomUpTo(game.height()-1).truncate(0) ) 
 	method posicionEstaVacia(unaPosicion) = game.getObjectsIn(unaPosicion).isEmpty()
+	method posicionEnemigo() = game.at(3.randomUpTo(6).truncate(0), 11.randomUpTo(12).truncate(0))
 }
 
 

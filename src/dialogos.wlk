@@ -1,7 +1,6 @@
 import wollok.game.*
 import elementos.*
 import elementos_nivel1.*
-//import elementos_nivel2.*
 import personajes.*
 
 
@@ -20,8 +19,5 @@ object dialogos{
 	method posicionDeSalidaIncorrecta(){
 		game.say(personajeNivel1, "No puedo pasar de nivel desde aqui.")
 		game.say(personajeNivel1, "Debo estar debajo del deposito.")
-	}
-	method personajeNoPuedeMoverse(unPersonaje){
-		game.say(unPersonaje,"Personaje: No puedo moverme en esa direccion")
 	}
 }

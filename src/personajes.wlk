@@ -8,7 +8,7 @@ import elementos_nivel2.cofreNivel2
 class Personaje { // Clase abstracta de personaje. Para usarla de plantilla
 	var property position
 	method image() = "player.png"
-	method mover(unSentido) { if (self.puedeMover(unSentido)) { self.position(unSentido.position(self)) } else { dialogos.personajeNoPuedeMoverse(self) } }
+	method mover(unSentido) { if (self.puedeMover(unSentido)) { self.position(unSentido.position(self)) } }
 	method puedeMover(unSentido) = unSentido.position(self).x().between(0,14) and unSentido.position(self).y().between(0,13)
 	
 }
@@ -87,41 +87,33 @@ object personajeNivel2 inherits Personaje{
 			self.position(posicionAleatoria)
 		}
 		else { self.teletransportar() }
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }
 object personajeNivel3 inherits Personaje{
 	var granadas = 0
 	var property ultimoSentidoDeMovimiento
-	//override method puedeColisionar() = true
+	var property salud = 100
+	
 	override method mover(unSentido) { 
 		super(unSentido)
 		self.ultimoSentidoDeMovimiento(unSentido)
 	}
+	method restarSalud(unValor){
+		self.salud(0.max(self.salud() - unValor))
+	}
 	method lanzarGranada() {
 		granadas =- 1
 	}
+//	method colisionar() {
+//		game.colliders(self).forEach({obj => obj.colisionarCon(self)})
+//	}
+}
 
-
+class Enemigo inherits Personaje {
+	const property posicionOrigen = posiciones.posicionEnemigo()
+	
+	override method image() = "enemigo.png"
+	method colisionarCon(personaje) { personaje.restarSalud(20) personaje.position(game.origin()) }
 }
 
 

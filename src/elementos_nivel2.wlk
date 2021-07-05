@@ -80,7 +80,7 @@ class ActuadorCeldaSorpresa inherits ParedLadrillo{
 object fondoNivel2 inherits Objeto {
 	override method position() = game.origin()
 	override method image() = "fondoNivel2.png"
-	override method puedeColisionar() = false
+	override method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
 	
 }

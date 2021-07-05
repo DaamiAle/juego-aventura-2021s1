@@ -3,6 +3,7 @@ import utilidades.*
 import personajes.personajeNivel2
 import elementos.*
 import elementos_nivel2.puertaDeSalidaNivel2
+import nivel_elMatabichos.*
 
 
 object nivelLlaves {
@@ -29,7 +30,7 @@ object nivelLlaves {
 	method ganarNivel() {
 		game.clear()
 		game.addVisual(finalNivel2)
-		game.schedule(2500, { game.clear() game.schedule(3000, { game.stop() }) })
+		game.schedule(2500, { game.clear() nivelElMatabichos.iniciarNivel()})
 	}
 	
 	method perderNivel() {
