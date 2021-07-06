@@ -8,7 +8,7 @@ class ObjetoNivel3 inherits Objeto{
 }
 class Granada inherits ObjetoNivel3 {
 	var property granadaActiva = false
-	override method image() = "pollo.png"
+	override method image() = "granada.png"
 	method explotar(){
 		game.removeVisual(self) 
 		explosion.position(self.position())

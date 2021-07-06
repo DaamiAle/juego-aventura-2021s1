@@ -75,11 +75,12 @@ object configuraciones{
 			personajeNivel3.enemigosRestantes(i)
 		})
 		//Indicadores
-		indicadorPrimario.nivel(2)
+		indicadorPrimario.nivel(3)
 		game.addVisual(indicadorPrimario)
 		game.addVisual(indicadorCentena)
 		game.addVisual(indicadorDecena)
 		game.addVisual(indicadorUnidad)
+		indicadorSecundario.nivel(3)
 		game.addVisual(indicadorSecundario)
 		game.addVisual(new IndicadorNumerico(position=indicadorSecundario.position().right(1)))
 		game.addVisual(indicadorEnemigos)
