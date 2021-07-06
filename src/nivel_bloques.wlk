@@ -27,8 +27,12 @@ object nivelBloques {
 	
 	method terminarNivel() {
 		game.clear()
-		game.addVisual(finalNivel1)
-		game.schedule(3000, { game.clear() nivelLlaves.iniciarNivel() })			
+		finales.nivel(1)
+		game.addVisual(finales)
+		game.schedule(3000, { 
+			game.clear() 
+			nivelLlaves.iniciarNivel()
+		})			
 	}
 		
 }

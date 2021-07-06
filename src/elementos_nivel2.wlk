@@ -1,42 +1,41 @@
 import elementos.*
 import utilidades.colocadores
 import wollok.game.game
-import utilidades.aleatorios
 
-class ParedLadrillo inherits Objeto{
+class ObjetoNivel2 inherits Objeto{
+	method colisionarCon(unObjeto){ game.removeVisual(self) }
+	method puedeColisionar() = true
+	override method puedeMover(unSentido) = true
+}
+class ParedLadrillo inherits ObjetoNivel2{
 	override method image() = "paredDeLadrillo.png"
 	override method puedeColisionar() = false
 }
-class Pollo inherits Objeto{
+class Pollo inherits ObjetoNivel2{
 	const property energia
 	override method image() = "pollo.png"
-	override method puedeColisionar() = true
-	method colisionarCon(unObjeto){
-		game.removeVisual(self)
+	override method colisionarCon(unObjeto){
+		super(unObjeto)
 		unObjeto.comer(self.energia())
 		colocadores.pollo()
 	}
 }
-object llaveNivel2 inherits Objeto{
+object llaveNivel2 inherits ObjetoNivel2{
 	override method image() = "llaveNivel2.png"
-	override method puedeColisionar() = true
-	method colisionarCon(unObjeto){
-		game.removeVisual(self)
+	override method colisionarCon(unObjeto){
+		super(unObjeto)
 		unObjeto.llavesEncontradas(unObjeto.llavesEncontradas() + 1)
-		if (aleatorios.numeroUnidad().even()) { colocadores.objetoNivel2(cofreNivel2) } 
-		else { colocadores.objetoNivel2(self) }		
+		if (aleatorios.numeroUnidad().even()) { colocadores.objetoNivel(cofreNivel2) } 
+		else { colocadores.objetoNivel(self) }		
 	}
 }
-object modificador inherits Objeto{
+object modificador inherits ObjetoNivel2{
 	var property energiaPollo = 0
-	
 	override method image() = "modificador.png"
-	override method puedeColisionar() = true
-	override method puedeMover(unSentido) = true
-	method colisionarCon(unObjeto){
+	override method colisionarCon(unObjeto){
 		game.removeVisual(self)
 		unObjeto.modificadorDeComida(aleatorios.numeroUnidad() % 3)
-		colocadores.objetoNivel2(self)	
+		colocadores.objetoNivel(self)	
 	}
 	method duplicador(personaje) {
 		personaje.sumarEnergia(self.energiaPollo() * 2)
@@ -51,15 +50,12 @@ object modificador inherits Objeto{
 		}
 	}
 }
-object puertaDeSalidaNivel2 inherits Objeto{
+object puertaDeSalidaNivel2 inherits ObjetoNivel2{
 	override method image() = "puertaSalida.png"
-	override method puedeColisionar() = true
 	override method position() = game.at(14,13)
-	method colisionarCon(unObjeto){
-		//resuelto por linea 19 de nivel_llaves.wlk
-	}
+	override method colisionarCon(unObjeto){ /*resuelto por linea 19 de nivel_llaves.wlk*/ }
 }
-object cofreNivel2 inherits Objeto{
+object cofreNivel2 inherits ObjetoNivel2{
 	override method image() = "cofre.png"
 	override method puedeColisionar() = false
 	method romperse(){
@@ -68,27 +64,24 @@ object cofreNivel2 inherits Objeto{
 		game.addVisual(llaveNivel2)
 	}
 }
-class ActuadorCeldaSorpresa inherits ParedLadrillo{
+class ActuadorCeldaSorpresa inherits ObjetoNivel2{
 	override method image() = "plataformaPiedra.png"
-	override method puedeColisionar() = true
-	override method puedeMover(unSentido) = true
-	method colisionarCon(unObjeto){
-		game.removeVisual(self)
+	override method colisionarCon(unObjeto){
+		super(self)
 		unObjeto.aplicarCeldaSorpresa()
 	}
 }
-object fondoNivel2 inherits Objeto {
+object fondoNivel2 inherits ObjetoNivel2 {
 	override method position() = game.origin()
 	override method image() = "fondoNivel2.png"
-	override method puedeColisionar() = true
-	override method puedeMover(unSentido) = true
+	override method colisionarCon(unObjeto){ }
 	
 }
 class IndicadorCeldaSorpresa inherits ParedLadrillo {
 	override method image() = "celdaSorpresa.png"
 }
 object laberinto{
-	const property posiciones = [
+	const property positions = [
 			[game.at(3,0),game.at(7,0)],
 			[game.at(1,1),game.at(3,1),game.at(5,1),game.at(7,1),game.at(9,1),game.at(11,1),game.at(13,1)],
 			[game.at(3,2),game.at(5,2),game.at(9,2),game.at(10,2),game.at(11,2),game.at(13,2)],

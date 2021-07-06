@@ -1,8 +1,8 @@
 import wollok.game.*
-import utilidades.*
+import utilidades.configuraciones
+import utilidades.actualizadores
 import personajes.personajeNivel2
 import elementos.*
-import elementos_nivel2.puertaDeSalidaNivel2
 import nivel_elMatabichos.*
 
 
@@ -14,8 +14,8 @@ object nivelLlaves {
 		keyboard.down().onPressDo 	{ personajeNivel2.mover(abajo) 		}
 		keyboard.left().onPressDo 	{ personajeNivel2.mover(izquierda) 	}
 		keyboard.right().onPressDo 	{ personajeNivel2.mover(derecha) 	}
-		keyboard.p().onPressDo { personajeNivel2.patear() }
-		// colisiones, acá sí hacen falta
+		keyboard.p().onPressDo 		{ personajeNivel2.patear() 			}
+		// Verificaciones constantes
 		game.onTick( 10,"Actualizacion indicador", { 
 			actualizadores.energiaRestante() 
 			actualizadores.llavesRestantes() 
@@ -23,19 +23,31 @@ object nivelLlaves {
 			actualizadores.personajeCruzoPuertaEn(self)
 			actualizadores.energiaDePersonajeEn(self)
 		} )
+		// Colisiones
 		game.onCollideDo(personajeNivel2, { objeto => personajeNivel2.colisionar(objeto) })
-		//agregar contador de llaves
 	}
 	
 	method ganarNivel() {
 		game.clear()
+		finalNivel2.resultado("victoria")
 		game.addVisual(finalNivel2)
-		game.schedule(2500, { game.clear() nivelElMatabichos.iniciarNivel()})
+		game.schedule(3000, { 
+			game.clear()
+			finales.nivel(2)
+			game.addVisual(finales)
+			game.schedule(300, {
+				nivelElMatabichos.iniciarNivel()
+			})
+		})
 	}
 	
 	method perderNivel() {
 		game.clear()
-		game.addVisual(gameOver)
-		game.schedule(3000, { game.stop() }) 
+		finalNivel2.resultado("gameOver")
+		game.addVisual(finalNivel2)
+		game.schedule(3000, { 
+			game.clear()
+			self.iniciarNivel()
+		}) 
 	}
 }
