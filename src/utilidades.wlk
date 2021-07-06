@@ -144,6 +144,10 @@ object colocadores{
 	method laberintoLadrillo(){
 		14.times({ fila => laberinto.positions().get(fila-1).forEach({ columna => game.addVisual(new ParedLadrillo(position=columna))})})
 	}
+	method celdaSorpresaDesactivada(){
+		const objetos = game.getObjectsIn(personajeNivel2.position().up(1)) + game.getObjectsIn(personajeNivel2.position().down(1))
+		objetos.filter({ obj => obj.esIndicador()}).forEach({obj => obj.image("celdaSorpresaInactiva.png")})
+	}
 }
 
 object actualizadores{

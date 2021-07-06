@@ -6,10 +6,12 @@ class ObjetoNivel2 inherits Objeto{
 	method colisionarCon(unObjeto){ game.removeVisual(self) }
 	method puedeColisionar() = true
 	override method puedeMover(unSentido) = true
+	method esIndicador() = false
 }
 class ParedLadrillo inherits ObjetoNivel2{
 	override method image() = "paredDeLadrillo.png"
 	override method puedeColisionar() = false
+	
 }
 class Pollo inherits ObjetoNivel2{
 	const property energia
@@ -78,7 +80,10 @@ object fondoNivel2 inherits ObjetoNivel2 {
 	
 }
 class IndicadorCeldaSorpresa inherits ParedLadrillo {
-	override method image() = "celdaSorpresa.png"
+	var image = "celdaSorpresa.png"
+	override method image() = image
+	method image(unaImagen) { image = unaImagen}
+	override method esIndicador() = true
 }
 object laberinto{
 	const property positions = [
