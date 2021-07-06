@@ -36,6 +36,7 @@ object nivelLlaves {
 			finales.nivel(2)
 			game.addVisual(finales)
 			game.schedule(300, {
+				game.clear()
 				nivelElMatabichos.iniciarNivel()
 			})
 		})

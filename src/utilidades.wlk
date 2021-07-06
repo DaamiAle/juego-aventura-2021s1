@@ -68,6 +68,7 @@ object configuraciones{
 		game.addVisual(barraSuperior)
 		//Personaje
 		personajeNivel3.salud(100)
+		try {personajeNivel3.granadas().clear()} catch e {}  
 		game.addVisual(personajeNivel3)
 		//Enemigos
 		5.times({ i =>
